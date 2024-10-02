@@ -560,6 +560,9 @@ public class LoginForm {
                 	 logger.info("plan c cui req---"+cui);
                     JsonObject response = RestPlanService.executePlan("https://webserviced.anaf.ro/SPVWS2/rest/cerere?tip=VECTOR%20FISCAL&cui="+cui.trim());               
                     logger.info("plan c cui res---"+response);
+                    
+                    
+                    Thread.sleep(1100);
                 }
    
 
@@ -593,6 +596,8 @@ public class LoginForm {
                 	 logger.info("plan d cui req---"+cui);
                     JsonObject response = RestPlanService.executePlan("https://webserviced.anaf.ro/SPVWS2/rest/cerere?tip=Fisa%20Rol&cui="+cui.trim());               
                     logger.info("plan d cui res---"+response);
+                  
+                    Thread.sleep(1100);
                 }
    
 
