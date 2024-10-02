@@ -1,0 +1,413 @@
+[2024-09-30 01:11:34,078] INFO595230[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan B at 2024-09-30 01:11:34
+  [2024-09-30 01:11:34,087] INFO595239[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: minutes
+  [2024-09-30 01:11:34,087] INFO595239[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:421) - Frequency Value: 10
+  [2024-09-30 01:11:34,089] INFO595241[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:442) - Executing actions for Plan B with frequency type: minutes and value: 10
+  [2024-09-30 01:11:34,091] INFO595243[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan C at 2024-09-30 01:11:34
+  [2024-09-30 01:11:34,092] INFO595244[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: minutes
+  [2024-09-30 01:11:34,092] INFO595244[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:421) - Frequency Value: 10
+  [2024-09-30 01:11:34,092] INFO595244[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:446) - Executing actions for Plan C with frequency type: minutes and value: 10
+  [2024-09-30 01:11:34,092] INFO595244[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan D at 2024-09-30 01:11:34
+  [2024-09-30 01:11:34,093] INFO595245[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: minutes
+  [2024-09-30 01:11:34,093] INFO595245[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:421) - Frequency Value: 10
+  [2024-09-30 01:11:34,093] INFO595245[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:450) - Executing actions for Plan D with frequency type: minutes and value: 10
+  [2024-09-30 01:11:34,093] INFO595245[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan F at 2024-09-30 01:11:34
+  [2024-09-30 01:11:34,093] INFO595245[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: always_on
+  [2024-09-30 01:11:34,093] INFO595245[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:423) - Frequency Value is not available for plan: Plan F
+  [2024-09-30 01:11:34,094] INFO595246[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:454) - Unknown plan: Plan F
+  [2024-09-30 01:11:34,094] INFO595246[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan G at 2024-09-30 01:11:34
+  [2024-09-30 01:11:34,094] INFO595246[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: always_on
+  [2024-09-30 01:11:34,094] INFO595246[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:423) - Frequency Value is not available for plan: Plan G
+  [2024-09-30 01:11:34,094] INFO595246[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:454) - Unknown plan: Plan G
+  [2024-09-30 01:11:34,095] INFO595247[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan F at 2024-09-30 01:11:34
+  [2024-09-30 01:11:34,095] INFO595247[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: always_on
+  [2024-09-30 01:11:34,095] INFO595247[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:423) - Frequency Value is not available for plan: Plan F
+  [2024-09-30 01:11:34,095] INFO595247[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:454) - Unknown plan: Plan F
+  [2024-09-30 01:11:34,096] INFO595248[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan G at 2024-09-30 01:11:34
+  [2024-09-30 01:11:34,096] INFO595248[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: always_on
+  [2024-09-30 01:11:34,096] INFO595248[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:423) - Frequency Value is not available for plan: Plan G
+  [2024-09-30 01:11:34,096] INFO595248[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:454) - Unknown plan: Plan G
+  [2024-09-30 01:11:34,097] INFO595249[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan H at 2024-09-30 01:11:34
+  [2024-09-30 01:11:34,097] INFO595249[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: minutes
+  [2024-09-30 01:11:34,098] INFO595250[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:421) - Frequency Value: 15
+  [2024-09-30 01:11:34,098] INFO595250[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:454) - Unknown plan: Plan H
+  [2024-09-30 01:11:34,098] INFO595250[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan A at 2024-09-30 01:11:34
+  [2024-09-30 01:11:34,098] INFO595250[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: minutes
+  [2024-09-30 01:11:34,098] INFO595250[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:421) - Frequency Value: 10
+  [2024-09-30 01:11:34,098] INFO595250[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:437) - Executing actions for Plan A with frequency type: minutes and value: 10
+  [2024-09-30 01:11:34,102]ERROR595254[Timer-0] - sqw.apelspv.ApelSPV.makeApiCall(ApelSPV.java:94) - Error in ApelSPV: 
+  java.security.ProviderException: Library C:\WINDOWS\system32\eTPKCS11.dll does not exist
+	at sun.security.pkcs11.SunPKCS11.<init>(SunPKCS11.java:294)
+	at sun.security.pkcs11.SunPKCS11.<init>(SunPKCS11.java:104)
+	at sqw.apelspv.ApelSPV.makeApiCall(ApelSPV.java:55)
+	at contai.service.RestPlanService.executePlan(RestPlanService.java:18)
+	at contai.forms.LoginForm.processPlanA(LoginForm.java:473)
+	at contai.forms.LoginForm.executePlanActions(LoginForm.java:438)
+	at contai.forms.LoginForm.triggerPlan(LoginForm.java:426)
+	at contai.forms.LoginForm.access$1(LoginForm.java:395)
+	at contai.forms.LoginForm$4.run(LoginForm.java:373)
+	at java.util.TimerThread.mainLoop(Timer.java:555)
+	at java.util.TimerThread.run(Timer.java:505)
+[2024-09-30 01:11:34,103]ERROR595255[Timer-0] - contai.service.RestPlanService.executePlan(RestPlanService.java:24) - Failed to retrieve response from API
+  [2024-09-30 01:11:36,078] INFO597230[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan B at 2024-09-30 01:11:36
+  [2024-09-30 01:11:36,078] INFO597230[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: minutes
+  [2024-09-30 01:11:36,079] INFO597231[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:421) - Frequency Value: 10
+  [2024-09-30 01:11:36,079] INFO597231[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:442) - Executing actions for Plan B with frequency type: minutes and value: 10
+  [2024-09-30 01:11:36,080] INFO597232[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan C at 2024-09-30 01:11:36
+  [2024-09-30 01:11:36,080] INFO597232[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: minutes
+  [2024-09-30 01:11:36,080] INFO597232[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:421) - Frequency Value: 10
+  [2024-09-30 01:11:36,080] INFO597232[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:446) - Executing actions for Plan C with frequency type: minutes and value: 10
+  [2024-09-30 01:11:36,081] INFO597233[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan D at 2024-09-30 01:11:36
+  [2024-09-30 01:11:36,082] INFO597234[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: minutes
+  [2024-09-30 01:11:36,082] INFO597234[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:421) - Frequency Value: 10
+  [2024-09-30 01:11:36,082] INFO597234[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:450) - Executing actions for Plan D with frequency type: minutes and value: 10
+  [2024-09-30 01:11:36,082] INFO597234[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan F at 2024-09-30 01:11:36
+  [2024-09-30 01:11:36,083] INFO597235[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: always_on
+  [2024-09-30 01:11:36,083] INFO597235[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:423) - Frequency Value is not available for plan: Plan F
+  [2024-09-30 01:11:36,083] INFO597235[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:454) - Unknown plan: Plan F
+  [2024-09-30 01:11:36,084] INFO597236[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan G at 2024-09-30 01:11:36
+  [2024-09-30 01:11:36,084] INFO597236[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: always_on
+  [2024-09-30 01:11:36,085] INFO597237[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:423) - Frequency Value is not available for plan: Plan G
+  [2024-09-30 01:11:36,085] INFO597237[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:454) - Unknown plan: Plan G
+  [2024-09-30 01:11:36,085] INFO597237[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan F at 2024-09-30 01:11:36
+  [2024-09-30 01:11:36,085] INFO597237[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: always_on
+  [2024-09-30 01:11:36,085] INFO597237[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:423) - Frequency Value is not available for plan: Plan F
+  [2024-09-30 01:11:36,086] INFO597238[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:454) - Unknown plan: Plan F
+  [2024-09-30 01:11:36,086] INFO597238[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan G at 2024-09-30 01:11:36
+  [2024-09-30 01:11:36,086] INFO597238[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: always_on
+  [2024-09-30 01:11:36,087] INFO597239[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:423) - Frequency Value is not available for plan: Plan G
+  [2024-09-30 01:11:36,087] INFO597239[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:454) - Unknown plan: Plan G
+  [2024-09-30 01:11:36,087] INFO597239[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan A at 2024-09-30 01:11:36
+  [2024-09-30 01:11:36,087] INFO597239[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: minutes
+  [2024-09-30 01:11:36,088] INFO597240[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:421) - Frequency Value: 10
+  [2024-09-30 01:11:36,088] INFO597240[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:437) - Executing actions for Plan A with frequency type: minutes and value: 10
+  [2024-09-30 01:11:36,092]ERROR597244[Timer-0] - sqw.apelspv.ApelSPV.makeApiCall(ApelSPV.java:94) - Error in ApelSPV: 
+  java.security.ProviderException: Library C:\WINDOWS\system32\eTPKCS11.dll does not exist
+	at sun.security.pkcs11.SunPKCS11.<init>(SunPKCS11.java:294)
+	at sun.security.pkcs11.SunPKCS11.<init>(SunPKCS11.java:104)
+	at sqw.apelspv.ApelSPV.makeApiCall(ApelSPV.java:55)
+	at contai.service.RestPlanService.executePlan(RestPlanService.java:18)
+	at contai.forms.LoginForm.processPlanA(LoginForm.java:473)
+	at contai.forms.LoginForm.executePlanActions(LoginForm.java:438)
+	at contai.forms.LoginForm.triggerPlan(LoginForm.java:426)
+	at contai.forms.LoginForm.access$1(LoginForm.java:395)
+	at contai.forms.LoginForm$4.run(LoginForm.java:373)
+	at java.util.TimerThread.mainLoop(Timer.java:555)
+	at java.util.TimerThread.run(Timer.java:505)
+[2024-09-30 01:11:36,093]ERROR597245[Timer-0] - contai.service.RestPlanService.executePlan(RestPlanService.java:24) - Failed to retrieve response from API
+  [2024-09-30 01:11:36,815] INFO597967[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan B at 2024-09-30 01:11:36
+  [2024-09-30 01:11:36,816] INFO597968[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: minutes
+  [2024-09-30 01:11:36,817] INFO597969[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:421) - Frequency Value: 10
+  [2024-09-30 01:11:36,817] INFO597969[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:442) - Executing actions for Plan B with frequency type: minutes and value: 10
+  [2024-09-30 01:11:36,817] INFO597969[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan C at 2024-09-30 01:11:36
+  [2024-09-30 01:11:36,824] INFO597976[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: minutes
+  [2024-09-30 01:11:36,825] INFO597977[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:421) - Frequency Value: 10
+  [2024-09-30 01:11:36,825] INFO597977[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:446) - Executing actions for Plan C with frequency type: minutes and value: 10
+  [2024-09-30 01:11:36,825] INFO597977[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan D at 2024-09-30 01:11:36
+  [2024-09-30 01:11:36,825] INFO597977[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: minutes
+  [2024-09-30 01:11:36,826] INFO597978[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:421) - Frequency Value: 10
+  [2024-09-30 01:11:36,826] INFO597978[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:450) - Executing actions for Plan D with frequency type: minutes and value: 10
+  [2024-09-30 01:11:36,826] INFO597978[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan F at 2024-09-30 01:11:36
+  [2024-09-30 01:11:36,826] INFO597978[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: always_on
+  [2024-09-30 01:11:36,827] INFO597979[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:423) - Frequency Value is not available for plan: Plan F
+  [2024-09-30 01:11:36,827] INFO597979[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:454) - Unknown plan: Plan F
+  [2024-09-30 01:11:36,827] INFO597979[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan G at 2024-09-30 01:11:36
+  [2024-09-30 01:11:36,827] INFO597979[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: always_on
+  [2024-09-30 01:11:36,827] INFO597979[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:423) - Frequency Value is not available for plan: Plan G
+  [2024-09-30 01:11:36,827] INFO597979[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:454) - Unknown plan: Plan G
+  [2024-09-30 01:11:36,828] INFO597980[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan H at 2024-09-30 01:11:36
+  [2024-09-30 01:11:36,828] INFO597980[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: minutes
+  [2024-09-30 01:11:36,828] INFO597980[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:421) - Frequency Value: 15
+  [2024-09-30 01:11:36,828] INFO597980[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:454) - Unknown plan: Plan H
+  [2024-09-30 01:11:36,828] INFO597980[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan F at 2024-09-30 01:11:36
+  [2024-09-30 01:11:36,829] INFO597981[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: always_on
+  [2024-09-30 01:11:36,829] INFO597981[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:423) - Frequency Value is not available for plan: Plan F
+  [2024-09-30 01:11:36,829] INFO597981[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:454) - Unknown plan: Plan F
+  [2024-09-30 01:11:36,829] INFO597981[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan G at 2024-09-30 01:11:36
+  [2024-09-30 01:11:36,829] INFO597981[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: always_on
+  [2024-09-30 01:11:36,829] INFO597981[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:423) - Frequency Value is not available for plan: Plan G
+  [2024-09-30 01:11:36,830] INFO597982[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:454) - Unknown plan: Plan G
+  [2024-09-30 01:11:36,830] INFO597982[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan A at 2024-09-30 01:11:36
+  [2024-09-30 01:11:36,830] INFO597982[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: minutes
+  [2024-09-30 01:11:36,830] INFO597982[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:421) - Frequency Value: 10
+  [2024-09-30 01:11:36,830] INFO597982[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:437) - Executing actions for Plan A with frequency type: minutes and value: 10
+  [2024-09-30 01:11:36,831]ERROR597983[Timer-0] - sqw.apelspv.ApelSPV.makeApiCall(ApelSPV.java:94) - Error in ApelSPV: 
+  java.security.ProviderException: Library C:\WINDOWS\system32\eTPKCS11.dll does not exist
+	at sun.security.pkcs11.SunPKCS11.<init>(SunPKCS11.java:294)
+	at sun.security.pkcs11.SunPKCS11.<init>(SunPKCS11.java:104)
+	at sqw.apelspv.ApelSPV.makeApiCall(ApelSPV.java:55)
+	at contai.service.RestPlanService.executePlan(RestPlanService.java:18)
+	at contai.forms.LoginForm.processPlanA(LoginForm.java:473)
+	at contai.forms.LoginForm.executePlanActions(LoginForm.java:438)
+	at contai.forms.LoginForm.triggerPlan(LoginForm.java:426)
+	at contai.forms.LoginForm.access$1(LoginForm.java:395)
+	at contai.forms.LoginForm$4.run(LoginForm.java:373)
+	at java.util.TimerThread.mainLoop(Timer.java:555)
+	at java.util.TimerThread.run(Timer.java:505)
+[2024-09-30 01:11:36,831]ERROR597983[Timer-0] - contai.service.RestPlanService.executePlan(RestPlanService.java:24) - Failed to retrieve response from API
+  [2024-09-30 01:11:37,176] INFO598328[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan B at 2024-09-30 01:11:37
+  [2024-09-30 01:11:37,177] INFO598329[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: minutes
+  [2024-09-30 01:11:37,177] INFO598329[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:421) - Frequency Value: 10
+  [2024-09-30 01:11:37,177] INFO598329[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:442) - Executing actions for Plan B with frequency type: minutes and value: 10
+  [2024-09-30 01:11:37,178] INFO598330[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan C at 2024-09-30 01:11:37
+  [2024-09-30 01:11:37,178] INFO598330[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: minutes
+  [2024-09-30 01:11:37,178] INFO598330[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:421) - Frequency Value: 10
+  [2024-09-30 01:11:37,178] INFO598330[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:446) - Executing actions for Plan C with frequency type: minutes and value: 10
+  [2024-09-30 01:11:37,179] INFO598331[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan D at 2024-09-30 01:11:37
+  [2024-09-30 01:11:37,179] INFO598331[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: minutes
+  [2024-09-30 01:11:37,179] INFO598331[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:421) - Frequency Value: 10
+  [2024-09-30 01:11:37,179] INFO598331[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:450) - Executing actions for Plan D with frequency type: minutes and value: 10
+  [2024-09-30 01:11:37,179] INFO598331[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan F at 2024-09-30 01:11:37
+  [2024-09-30 01:11:37,179] INFO598331[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: always_on
+  [2024-09-30 01:11:37,180] INFO598332[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:423) - Frequency Value is not available for plan: Plan F
+  [2024-09-30 01:11:37,180] INFO598332[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:454) - Unknown plan: Plan F
+  [2024-09-30 01:11:37,180] INFO598332[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan G at 2024-09-30 01:11:37
+  [2024-09-30 01:11:37,180] INFO598332[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: always_on
+  [2024-09-30 01:11:37,180] INFO598332[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:423) - Frequency Value is not available for plan: Plan G
+  [2024-09-30 01:11:37,180] INFO598332[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:454) - Unknown plan: Plan G
+  [2024-09-30 01:11:37,181] INFO598333[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan F at 2024-09-30 01:11:37
+  [2024-09-30 01:11:37,181] INFO598333[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: always_on
+  [2024-09-30 01:11:37,181] INFO598333[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:423) - Frequency Value is not available for plan: Plan F
+  [2024-09-30 01:11:37,181] INFO598333[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:454) - Unknown plan: Plan F
+  [2024-09-30 01:11:37,181] INFO598333[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan G at 2024-09-30 01:11:37
+  [2024-09-30 01:11:37,181] INFO598333[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: always_on
+  [2024-09-30 01:11:37,182] INFO598334[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:423) - Frequency Value is not available for plan: Plan G
+  [2024-09-30 01:11:37,182] INFO598334[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:454) - Unknown plan: Plan G
+  [2024-09-30 01:11:37,182] INFO598334[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan H at 2024-09-30 01:11:37
+  [2024-09-30 01:11:37,183] INFO598335[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: minutes
+  [2024-09-30 01:11:37,183] INFO598335[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:421) - Frequency Value: 15
+  [2024-09-30 01:11:37,185] INFO598337[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:454) - Unknown plan: Plan H
+  [2024-09-30 01:11:37,185] INFO598337[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan A at 2024-09-30 01:11:37
+  [2024-09-30 01:11:37,185] INFO598337[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: minutes
+  [2024-09-30 01:11:37,186] INFO598338[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:421) - Frequency Value: 10
+  [2024-09-30 01:11:37,186] INFO598338[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:437) - Executing actions for Plan A with frequency type: minutes and value: 10
+  [2024-09-30 01:11:37,188]ERROR598340[Timer-0] - sqw.apelspv.ApelSPV.makeApiCall(ApelSPV.java:94) - Error in ApelSPV: 
+  java.security.ProviderException: Library C:\WINDOWS\system32\eTPKCS11.dll does not exist
+	at sun.security.pkcs11.SunPKCS11.<init>(SunPKCS11.java:294)
+	at sun.security.pkcs11.SunPKCS11.<init>(SunPKCS11.java:104)
+	at sqw.apelspv.ApelSPV.makeApiCall(ApelSPV.java:55)
+	at contai.service.RestPlanService.executePlan(RestPlanService.java:18)
+	at contai.forms.LoginForm.processPlanA(LoginForm.java:473)
+	at contai.forms.LoginForm.executePlanActions(LoginForm.java:438)
+	at contai.forms.LoginForm.triggerPlan(LoginForm.java:426)
+	at contai.forms.LoginForm.access$1(LoginForm.java:395)
+	at contai.forms.LoginForm$4.run(LoginForm.java:373)
+	at java.util.TimerThread.mainLoop(Timer.java:555)
+	at java.util.TimerThread.run(Timer.java:505)
+[2024-09-30 01:11:37,190]ERROR598342[Timer-0] - contai.service.RestPlanService.executePlan(RestPlanService.java:24) - Failed to retrieve response from API
+  [2024-09-30 01:11:37,539] INFO598691[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan B at 2024-09-30 01:11:37
+  [2024-09-30 01:11:37,540] INFO598692[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: minutes
+  [2024-09-30 01:11:37,540] INFO598692[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:421) - Frequency Value: 10
+  [2024-09-30 01:11:37,541] INFO598693[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:442) - Executing actions for Plan B with frequency type: minutes and value: 10
+  [2024-09-30 01:11:37,541] INFO598693[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan C at 2024-09-30 01:11:37
+  [2024-09-30 01:11:37,541] INFO598693[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: minutes
+  [2024-09-30 01:11:37,541] INFO598693[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:421) - Frequency Value: 10
+  [2024-09-30 01:11:37,541] INFO598693[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:446) - Executing actions for Plan C with frequency type: minutes and value: 10
+  [2024-09-30 01:11:37,547] INFO598699[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan D at 2024-09-30 01:11:37
+  [2024-09-30 01:11:37,547] INFO598699[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: minutes
+  [2024-09-30 01:11:37,547] INFO598699[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:421) - Frequency Value: 10
+  [2024-09-30 01:11:37,547] INFO598699[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:450) - Executing actions for Plan D with frequency type: minutes and value: 10
+  [2024-09-30 01:11:37,547] INFO598699[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan F at 2024-09-30 01:11:37
+  [2024-09-30 01:11:37,547] INFO598699[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: always_on
+  [2024-09-30 01:11:37,548] INFO598700[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:423) - Frequency Value is not available for plan: Plan F
+  [2024-09-30 01:11:37,548] INFO598700[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:454) - Unknown plan: Plan F
+  [2024-09-30 01:11:37,548] INFO598700[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan G at 2024-09-30 01:11:37
+  [2024-09-30 01:11:37,548] INFO598700[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: always_on
+  [2024-09-30 01:11:37,549] INFO598701[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:423) - Frequency Value is not available for plan: Plan G
+  [2024-09-30 01:11:37,549] INFO598701[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:454) - Unknown plan: Plan G
+  [2024-09-30 01:11:37,549] INFO598701[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan F at 2024-09-30 01:11:37
+  [2024-09-30 01:11:37,550] INFO598702[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: always_on
+  [2024-09-30 01:11:37,551] INFO598703[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:423) - Frequency Value is not available for plan: Plan F
+  [2024-09-30 01:11:37,551] INFO598703[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:454) - Unknown plan: Plan F
+  [2024-09-30 01:11:37,551] INFO598703[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan G at 2024-09-30 01:11:37
+  [2024-09-30 01:11:37,551] INFO598703[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: always_on
+  [2024-09-30 01:11:37,552] INFO598704[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:423) - Frequency Value is not available for plan: Plan G
+  [2024-09-30 01:11:37,552] INFO598704[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:454) - Unknown plan: Plan G
+  [2024-09-30 01:11:37,552] INFO598704[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan A at 2024-09-30 01:11:37
+  [2024-09-30 01:11:37,552] INFO598704[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: minutes
+  [2024-09-30 01:11:37,552] INFO598704[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:421) - Frequency Value: 10
+  [2024-09-30 01:11:37,553] INFO598705[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:437) - Executing actions for Plan A with frequency type: minutes and value: 10
+  [2024-09-30 01:11:37,554]ERROR598706[Timer-0] - sqw.apelspv.ApelSPV.makeApiCall(ApelSPV.java:94) - Error in ApelSPV: 
+  java.security.ProviderException: Library C:\WINDOWS\system32\eTPKCS11.dll does not exist
+	at sun.security.pkcs11.SunPKCS11.<init>(SunPKCS11.java:294)
+	at sun.security.pkcs11.SunPKCS11.<init>(SunPKCS11.java:104)
+	at sqw.apelspv.ApelSPV.makeApiCall(ApelSPV.java:55)
+	at contai.service.RestPlanService.executePlan(RestPlanService.java:18)
+	at contai.forms.LoginForm.processPlanA(LoginForm.java:473)
+	at contai.forms.LoginForm.executePlanActions(LoginForm.java:438)
+	at contai.forms.LoginForm.triggerPlan(LoginForm.java:426)
+	at contai.forms.LoginForm.access$1(LoginForm.java:395)
+	at contai.forms.LoginForm$4.run(LoginForm.java:373)
+	at java.util.TimerThread.mainLoop(Timer.java:555)
+	at java.util.TimerThread.run(Timer.java:505)
+[2024-09-30 01:11:37,554]ERROR598706[Timer-0] - contai.service.RestPlanService.executePlan(RestPlanService.java:24) - Failed to retrieve response from API
+  [2024-09-30 01:11:37,900] INFO599052[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan B at 2024-09-30 01:11:37
+  [2024-09-30 01:11:37,900] INFO599052[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: minutes
+  [2024-09-30 01:11:37,900] INFO599052[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:421) - Frequency Value: 10
+  [2024-09-30 01:11:37,900] INFO599052[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:442) - Executing actions for Plan B with frequency type: minutes and value: 10
+  [2024-09-30 01:11:37,901] INFO599053[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan C at 2024-09-30 01:11:37
+  [2024-09-30 01:11:37,901] INFO599053[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: minutes
+  [2024-09-30 01:11:37,901] INFO599053[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:421) - Frequency Value: 10
+  [2024-09-30 01:11:37,901] INFO599053[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:446) - Executing actions for Plan C with frequency type: minutes and value: 10
+  [2024-09-30 01:11:37,901] INFO599053[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan D at 2024-09-30 01:11:37
+  [2024-09-30 01:11:37,902] INFO599054[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: minutes
+  [2024-09-30 01:11:37,902] INFO599054[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:421) - Frequency Value: 10
+  [2024-09-30 01:11:37,902] INFO599054[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:450) - Executing actions for Plan D with frequency type: minutes and value: 10
+  [2024-09-30 01:11:37,902] INFO599054[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan F at 2024-09-30 01:11:37
+  [2024-09-30 01:11:37,902] INFO599054[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: always_on
+  [2024-09-30 01:11:37,903] INFO599055[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:423) - Frequency Value is not available for plan: Plan F
+  [2024-09-30 01:11:37,907] INFO599059[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:454) - Unknown plan: Plan F
+  [2024-09-30 01:11:37,908] INFO599060[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan G at 2024-09-30 01:11:37
+  [2024-09-30 01:11:37,908] INFO599060[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: always_on
+  [2024-09-30 01:11:37,908] INFO599060[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:423) - Frequency Value is not available for plan: Plan G
+  [2024-09-30 01:11:37,908] INFO599060[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:454) - Unknown plan: Plan G
+  [2024-09-30 01:11:37,909] INFO599061[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan H at 2024-09-30 01:11:37
+  [2024-09-30 01:11:37,909] INFO599061[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: minutes
+  [2024-09-30 01:11:37,909] INFO599061[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:421) - Frequency Value: 15
+  [2024-09-30 01:11:37,909] INFO599061[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:454) - Unknown plan: Plan H
+  [2024-09-30 01:11:37,909] INFO599061[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan F at 2024-09-30 01:11:37
+  [2024-09-30 01:11:37,909] INFO599061[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: always_on
+  [2024-09-30 01:11:37,909] INFO599061[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:423) - Frequency Value is not available for plan: Plan F
+  [2024-09-30 01:11:37,909] INFO599061[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:454) - Unknown plan: Plan F
+  [2024-09-30 01:11:37,910] INFO599062[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan G at 2024-09-30 01:11:37
+  [2024-09-30 01:11:37,910] INFO599062[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: always_on
+  [2024-09-30 01:11:37,910] INFO599062[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:423) - Frequency Value is not available for plan: Plan G
+  [2024-09-30 01:11:37,910] INFO599062[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:454) - Unknown plan: Plan G
+  [2024-09-30 01:11:37,910] INFO599062[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan A at 2024-09-30 01:11:37
+  [2024-09-30 01:11:37,910] INFO599062[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: minutes
+  [2024-09-30 01:11:37,911] INFO599063[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:421) - Frequency Value: 10
+  [2024-09-30 01:11:37,911] INFO599063[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:437) - Executing actions for Plan A with frequency type: minutes and value: 10
+  [2024-09-30 01:11:37,911]ERROR599063[Timer-0] - sqw.apelspv.ApelSPV.makeApiCall(ApelSPV.java:94) - Error in ApelSPV: 
+  java.security.ProviderException: Library C:\WINDOWS\system32\eTPKCS11.dll does not exist
+	at sun.security.pkcs11.SunPKCS11.<init>(SunPKCS11.java:294)
+	at sun.security.pkcs11.SunPKCS11.<init>(SunPKCS11.java:104)
+	at sqw.apelspv.ApelSPV.makeApiCall(ApelSPV.java:55)
+	at contai.service.RestPlanService.executePlan(RestPlanService.java:18)
+	at contai.forms.LoginForm.processPlanA(LoginForm.java:473)
+	at contai.forms.LoginForm.executePlanActions(LoginForm.java:438)
+	at contai.forms.LoginForm.triggerPlan(LoginForm.java:426)
+	at contai.forms.LoginForm.access$1(LoginForm.java:395)
+	at contai.forms.LoginForm$4.run(LoginForm.java:373)
+	at java.util.TimerThread.mainLoop(Timer.java:555)
+	at java.util.TimerThread.run(Timer.java:505)
+[2024-09-30 01:11:37,912]ERROR599064[Timer-0] - contai.service.RestPlanService.executePlan(RestPlanService.java:24) - Failed to retrieve response from API
+  [2024-09-30 01:11:38,262] INFO599414[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan B at 2024-09-30 01:11:38
+  [2024-09-30 01:11:38,262] INFO599414[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: minutes
+  [2024-09-30 01:11:38,262] INFO599414[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:421) - Frequency Value: 10
+  [2024-09-30 01:11:38,262] INFO599414[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:442) - Executing actions for Plan B with frequency type: minutes and value: 10
+  [2024-09-30 01:11:38,263] INFO599415[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan C at 2024-09-30 01:11:38
+  [2024-09-30 01:11:38,263] INFO599415[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: minutes
+  [2024-09-30 01:11:38,263] INFO599415[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:421) - Frequency Value: 10
+  [2024-09-30 01:11:38,263] INFO599415[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:446) - Executing actions for Plan C with frequency type: minutes and value: 10
+  [2024-09-30 01:11:38,264] INFO599416[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan D at 2024-09-30 01:11:38
+  [2024-09-30 01:11:38,264] INFO599416[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: minutes
+  [2024-09-30 01:11:38,264] INFO599416[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:421) - Frequency Value: 10
+  [2024-09-30 01:11:38,265] INFO599417[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:450) - Executing actions for Plan D with frequency type: minutes and value: 10
+  [2024-09-30 01:11:38,272] INFO599424[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan F at 2024-09-30 01:11:38
+  [2024-09-30 01:11:38,273] INFO599425[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: always_on
+  [2024-09-30 01:11:38,273] INFO599425[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:423) - Frequency Value is not available for plan: Plan F
+  [2024-09-30 01:11:38,273] INFO599425[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:454) - Unknown plan: Plan F
+  [2024-09-30 01:11:38,273] INFO599425[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan G at 2024-09-30 01:11:38
+  [2024-09-30 01:11:38,273] INFO599425[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: always_on
+  [2024-09-30 01:11:38,273] INFO599425[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:423) - Frequency Value is not available for plan: Plan G
+  [2024-09-30 01:11:38,273] INFO599425[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:454) - Unknown plan: Plan G
+  [2024-09-30 01:11:38,274] INFO599426[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan F at 2024-09-30 01:11:38
+  [2024-09-30 01:11:38,274] INFO599426[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: always_on
+  [2024-09-30 01:11:38,274] INFO599426[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:423) - Frequency Value is not available for plan: Plan F
+  [2024-09-30 01:11:38,274] INFO599426[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:454) - Unknown plan: Plan F
+  [2024-09-30 01:11:38,274] INFO599426[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan G at 2024-09-30 01:11:38
+  [2024-09-30 01:11:38,274] INFO599426[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: always_on
+  [2024-09-30 01:11:38,274] INFO599426[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:423) - Frequency Value is not available for plan: Plan G
+  [2024-09-30 01:11:38,275] INFO599427[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:454) - Unknown plan: Plan G
+  [2024-09-30 01:11:38,275] INFO599427[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan H at 2024-09-30 01:11:38
+  [2024-09-30 01:11:38,275] INFO599427[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: minutes
+  [2024-09-30 01:11:38,275] INFO599427[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:421) - Frequency Value: 15
+  [2024-09-30 01:11:38,275] INFO599427[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:454) - Unknown plan: Plan H
+  [2024-09-30 01:11:38,275] INFO599427[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan A at 2024-09-30 01:11:38
+  [2024-09-30 01:11:38,276] INFO599428[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: minutes
+  [2024-09-30 01:11:38,276] INFO599428[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:421) - Frequency Value: 10
+  [2024-09-30 01:11:38,276] INFO599428[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:437) - Executing actions for Plan A with frequency type: minutes and value: 10
+  [2024-09-30 01:11:38,277]ERROR599429[Timer-0] - sqw.apelspv.ApelSPV.makeApiCall(ApelSPV.java:94) - Error in ApelSPV: 
+  java.security.ProviderException: Library C:\WINDOWS\system32\eTPKCS11.dll does not exist
+	at sun.security.pkcs11.SunPKCS11.<init>(SunPKCS11.java:294)
+	at sun.security.pkcs11.SunPKCS11.<init>(SunPKCS11.java:104)
+	at sqw.apelspv.ApelSPV.makeApiCall(ApelSPV.java:55)
+	at contai.service.RestPlanService.executePlan(RestPlanService.java:18)
+	at contai.forms.LoginForm.processPlanA(LoginForm.java:473)
+	at contai.forms.LoginForm.executePlanActions(LoginForm.java:438)
+	at contai.forms.LoginForm.triggerPlan(LoginForm.java:426)
+	at contai.forms.LoginForm.access$1(LoginForm.java:395)
+	at contai.forms.LoginForm$4.run(LoginForm.java:373)
+	at java.util.TimerThread.mainLoop(Timer.java:555)
+	at java.util.TimerThread.run(Timer.java:505)
+[2024-09-30 01:11:38,277]ERROR599429[Timer-0] - contai.service.RestPlanService.executePlan(RestPlanService.java:24) - Failed to retrieve response from API
+  [2024-09-30 01:11:38,643] INFO599795[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan B at 2024-09-30 01:11:38
+  [2024-09-30 01:11:38,643] INFO599795[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: minutes
+  [2024-09-30 01:11:38,644] INFO599796[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:421) - Frequency Value: 10
+  [2024-09-30 01:11:38,644] INFO599796[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:442) - Executing actions for Plan B with frequency type: minutes and value: 10
+  [2024-09-30 01:11:38,644] INFO599796[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan C at 2024-09-30 01:11:38
+  [2024-09-30 01:11:38,655] INFO599807[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: minutes
+  [2024-09-30 01:11:38,656] INFO599808[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:421) - Frequency Value: 10
+  [2024-09-30 01:11:38,656] INFO599808[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:446) - Executing actions for Plan C with frequency type: minutes and value: 10
+  [2024-09-30 01:11:38,656] INFO599808[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan D at 2024-09-30 01:11:38
+  [2024-09-30 01:11:38,657] INFO599809[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: minutes
+  [2024-09-30 01:11:38,657] INFO599809[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:421) - Frequency Value: 10
+  [2024-09-30 01:11:38,657] INFO599809[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:450) - Executing actions for Plan D with frequency type: minutes and value: 10
+  [2024-09-30 01:11:38,657] INFO599809[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan F at 2024-09-30 01:11:38
+  [2024-09-30 01:11:38,657] INFO599809[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: always_on
+  [2024-09-30 01:11:38,657] INFO599809[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:423) - Frequency Value is not available for plan: Plan F
+  [2024-09-30 01:11:38,658] INFO599810[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:454) - Unknown plan: Plan F
+  [2024-09-30 01:11:38,658] INFO599810[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan G at 2024-09-30 01:11:38
+  [2024-09-30 01:11:38,658] INFO599810[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: always_on
+  [2024-09-30 01:11:38,658] INFO599810[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:423) - Frequency Value is not available for plan: Plan G
+  [2024-09-30 01:11:38,658] INFO599810[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:454) - Unknown plan: Plan G
+  [2024-09-30 01:11:38,659] INFO599811[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan F at 2024-09-30 01:11:38
+  [2024-09-30 01:11:38,659] INFO599811[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: always_on
+  [2024-09-30 01:11:38,660] INFO599812[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:423) - Frequency Value is not available for plan: Plan F
+  [2024-09-30 01:11:38,660] INFO599812[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:454) - Unknown plan: Plan F
+  [2024-09-30 01:11:38,660] INFO599812[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan G at 2024-09-30 01:11:38
+  [2024-09-30 01:11:38,660] INFO599812[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: always_on
+  [2024-09-30 01:11:38,660] INFO599812[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:423) - Frequency Value is not available for plan: Plan G
+  [2024-09-30 01:11:38,660] INFO599812[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:454) - Unknown plan: Plan G
+  [2024-09-30 01:11:38,660] INFO599812[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan A at 2024-09-30 01:11:38
+  [2024-09-30 01:11:38,660] INFO599812[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: minutes
+  [2024-09-30 01:11:38,661] INFO599813[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:421) - Frequency Value: 10
+  [2024-09-30 01:11:38,661] INFO599813[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:437) - Executing actions for Plan A with frequency type: minutes and value: 10
+  [2024-09-30 01:11:38,662]ERROR599814[Timer-0] - sqw.apelspv.ApelSPV.makeApiCall(ApelSPV.java:94) - Error in ApelSPV: 
+  java.security.ProviderException: Library C:\WINDOWS\system32\eTPKCS11.dll does not exist
+	at sun.security.pkcs11.SunPKCS11.<init>(SunPKCS11.java:294)
+	at sun.security.pkcs11.SunPKCS11.<init>(SunPKCS11.java:104)
+	at sqw.apelspv.ApelSPV.makeApiCall(ApelSPV.java:55)
+	at contai.service.RestPlanService.executePlan(RestPlanService.java:18)
+	at contai.forms.LoginForm.processPlanA(LoginForm.java:473)
+	at contai.forms.LoginForm.executePlanActions(LoginForm.java:438)
+	at contai.forms.LoginForm.triggerPlan(LoginForm.java:426)
+	at contai.forms.LoginForm.access$1(LoginForm.java:395)
+	at contai.forms.LoginForm$4.run(LoginForm.java:373)
+	at java.util.TimerThread.mainLoop(Timer.java:555)
+	at java.util.TimerThread.run(Timer.java:505)
+[2024-09-30 01:11:38,662]ERROR599814[Timer-0] - contai.service.RestPlanService.executePlan(RestPlanService.java:24) - Failed to retrieve response from API
+  [2024-09-30 01:11:39,015] INFO600167[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan B at 2024-09-30 01:11:39
+  [2024-09-30 01:11:39,016] INFO600168[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: minutes
+  [2024-09-30 01:11:39,016] INFO600168[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:421) - Frequency Value: 10
+  [2024-09-30 01:11:39,016] INFO600168[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:442) - Executing actions for Plan B with frequency type: minutes and value: 10
+  [2024-09-30 01:11:39,016] INFO600168[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan C at 2024-09-30 01:11:39
+  [2024-09-30 01:11:39,016] INFO600168[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: minutes
+  [2024-09-30 01:11:39,017] INFO600169[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:421) - Frequency Value: 10
+  [2024-09-30 01:11:39,017] INFO600169[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:446) - Executing actions for Plan C with frequency type: minutes and value: 10
+  [2024-09-30 01:11:39,017] INFO600169[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan D at 2024-09-30 01:11:39
+  [2024-09-30 01:11:39,017] INFO600169[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: minutes
+  [2024-09-30 01:11:39,018] INFO600170[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:421) - Frequency Value: 10
+  [2024-09-30 01:11:39,018] INFO600170[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:450) - Executing actions for Plan D with frequency type: minutes and value: 10
+  [2024-09-30 01:11:39,018] INFO600170[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan F at 2024-09-30 01:11:39
+  [2024-09-30 01:11:39,018] INFO600170[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: always_on
+  [2024-09-30 01:11:39,018] INFO600170[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:423) - Frequency Value is not available for plan: Plan F
+  [2024-09-30 01:11:39,018] INFO600170[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:454) - Unknown plan: Plan F
+  [2024-09-30 01:11:39,019] INFO600171[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan G at 2024-09-30 01:11:39
+  [2024-09-30 01:11:39,019] INFO600171[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: always_on
+  [2024-09-30 01:11:39,021] INFO600173[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:423) - Frequency Value is not available for plan: Plan G
+  [2024-09-30 01:11:39,021] INFO600173[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:454) - Unknown plan: Plan G
+  [2024-09-30 01:11:39,022] INFO600174[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan H at 2024-09-30 01:11:39
+  [2024-09-30 01:11:39,023] INFO600175[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: minutes
+  [2024-09-30 01:11:39,023] INFO600175[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:421) - Frequency Value: 15
+  [2024-09-30 01:11:39,023] INFO600175[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:454) - Unknown plan: Plan H
+  

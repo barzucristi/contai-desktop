@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<declaratie390  luna="4" an="2016" d_rec="0" nume_declar="Vasile1" prenume_declar="Popescu1" functie_declar="Administrator" cui="34983363" den="Vasile Popescu" adresa="Bucuresti Aleea Florilor" totalPlata_A="40" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="mfp:anaf:dgti:d390:declaratie:v1 D390.xsd" xmlns="mfp:anaf:dgti:d390:declaratie:v1">
+    <rezumat  nr_pag="1" nrOPI="2" bazaL="0" bazaT="0" bazaA="38" bazaP="0" bazaS="0" total_baza="38" />
+    <operatie  tip="A" tara="NL" denO="Uber BV" baza="23" />
+    <operatie  tip="A" tara="DK" denO="Gigi SA" baza="15" />
+</declaratie390>

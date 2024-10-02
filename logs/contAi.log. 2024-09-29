@@ -1,0 +1,176 @@
+[2024-09-29 23:32:46,222] INFO     0[AWT-EventQueue-0] - contai.service.RestLoginService.login(RestLoginService.java:54) - Response login--{"success":true,"status":200,"message":"User logged in successfully","messageCode":null,"data":{"user":{"_id":"66d57e41cc90641a7d1d6987","role":"account_admin","first_name":"Jemish","last_name":"Virani","email":"jemish.v@crestinfosystems.com","email_verified_at":"2024-09-04T05:10:51.780Z","account_status":"active","auth_provider":"local","created_at":"2024-09-02T08:58:41.870Z","updated_at":"2024-09-13T09:02:55.411Z","current_subscription":{"_id":"66ded56c45d369b632d78dca","stripe_plan":{"_id":"66debbc354b838fb3a1a0f1c","name":"Starter Plan","desktop_plans":[{"name":"Plan A","active":true,"frequency":{"type":"minutes","value":10,"dates":null},"priority":1,"_id":"66ed3d740211a2aab1ab3c01"},{"name":"Plan B","active":true,"frequency":{"type":"minutes","value":10,"dates":null},"priority":1,"_id":"66ed3d740211a2aab1ab3c02"},{"name":"Plan C","active":true,"frequency":{"type":"minutes","value":10,"dates":null},"priority":1,"_id":"66ed3d740211a2aab1ab3c03"},{"name":"Plan D","active":true,"frequency":{"type":"minutes","value":10,"dates":null},"priority":1,"_id":"66ed3d740211a2aab1ab3c04"},{"name":"Plan F","active":true,"frequency":{"type":"always_on","value":null,"dates":null},"priority":1,"_id":"66ed3d740211a2aab1ab3c05"},{"name":"Plan G","active":true,"frequency":{"type":"always_on","value":null,"dates":null},"priority":1,"_id":"66ed3d740211a2aab1ab3c06"},{"name":"Plan H","active":true,"frequency":{"type":"minutes","value":15,"dates":null},"priority":1,"_id":"66ed3d740211a2aab1ab3c07"}],"reports":["users_report","companies_report","spv_report","company_name_report","vector_fiscal_report","document_synchronization","document_signature","document_filing"]},"stripe_id":"sub_1Px4P3Gr4CH5nddEkDONIJV8","stripe_price_id":"price_1Px3bcGr4CH5nddEjtw2ZQZP","status":"active","amount":10,"trial_start_at":"2024-09-09T10:01:00.000Z","trial_end_at":"2024-10-09T10:01:00.000Z","starts_at":"2024-09-09T10:01:00.000Z","ends_at":null,"billing_cycle_type":"monthly","canceled_at":null},"stripe_customer_id":"cus_QogknNCDpEgd2k"},"cui":{"active":["36354963"],"inactive":[]},"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjZkNTdlNDFjYzkwNjQxYTdkMWQ2OTg3Iiwicm9sZSI6ImFjY291bnRfYWRtaW4iLCJpYXQiOjE3Mjc2MzI5NjYsImV4cCI6MTczMDIyNDk2Nn0.S3w2u2WqxY2k9tIMVZTtCtc21vTxcBpK0IBoUSwRnXA"}}
+  [2024-09-29 23:38:18,848] INFO     0[AWT-EventQueue-0] - contai.service.RestLoginService.login(RestLoginService.java:54) - Response login--{"success":true,"status":200,"message":"User logged in successfully","messageCode":null,"data":{"user":{"_id":"66d57e41cc90641a7d1d6987","role":"account_admin","first_name":"Jemish","last_name":"Virani","email":"jemish.v@crestinfosystems.com","email_verified_at":"2024-09-04T05:10:51.780Z","account_status":"active","auth_provider":"local","created_at":"2024-09-02T08:58:41.870Z","updated_at":"2024-09-13T09:02:55.411Z","current_subscription":{"_id":"66ded56c45d369b632d78dca","stripe_plan":{"_id":"66debbc354b838fb3a1a0f1c","name":"Starter Plan","desktop_plans":[{"name":"Plan A","active":true,"frequency":{"type":"minutes","value":10,"dates":null},"priority":1,"_id":"66ed3d740211a2aab1ab3c01"},{"name":"Plan B","active":true,"frequency":{"type":"minutes","value":10,"dates":null},"priority":1,"_id":"66ed3d740211a2aab1ab3c02"},{"name":"Plan C","active":true,"frequency":{"type":"minutes","value":10,"dates":null},"priority":1,"_id":"66ed3d740211a2aab1ab3c03"},{"name":"Plan D","active":true,"frequency":{"type":"minutes","value":10,"dates":null},"priority":1,"_id":"66ed3d740211a2aab1ab3c04"},{"name":"Plan F","active":true,"frequency":{"type":"always_on","value":null,"dates":null},"priority":1,"_id":"66ed3d740211a2aab1ab3c05"},{"name":"Plan G","active":true,"frequency":{"type":"always_on","value":null,"dates":null},"priority":1,"_id":"66ed3d740211a2aab1ab3c06"},{"name":"Plan H","active":true,"frequency":{"type":"minutes","value":15,"dates":null},"priority":1,"_id":"66ed3d740211a2aab1ab3c07"}],"reports":["users_report","companies_report","spv_report","company_name_report","vector_fiscal_report","document_synchronization","document_signature","document_filing"]},"stripe_id":"sub_1Px4P3Gr4CH5nddEkDONIJV8","stripe_price_id":"price_1Px3bcGr4CH5nddEjtw2ZQZP","status":"active","amount":10,"trial_start_at":"2024-09-09T10:01:00.000Z","trial_end_at":"2024-10-09T10:01:00.000Z","starts_at":"2024-09-09T10:01:00.000Z","ends_at":null,"billing_cycle_type":"monthly","canceled_at":null},"stripe_customer_id":"cus_QogknNCDpEgd2k"},"cui":{"active":["36354963"],"inactive":[]},"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjZkNTdlNDFjYzkwNjQxYTdkMWQ2OTg3Iiwicm9sZSI6ImFjY291bnRfYWRtaW4iLCJpYXQiOjE3Mjc2MzMyOTgsImV4cCI6MTczMDIyNTI5OH0.REP08TSYWDpSy8uW40YT5mWGHQ_ba4pyh4hWTAx9VVI"}}
+  [2024-09-29 23:38:38,650] INFO 19802[AWT-EventQueue-0] - contai.forms.LoginForm.validateAndLogin(LoginForm.java:286) - activeArray["36354963"]inactiveArray[]
+  [2024-09-29 23:38:38,651] INFO 19803[AWT-EventQueue-0] - contai.forms.LoginForm.setupPlanTrigger(LoginForm.java:357) - Triggering plan: Plan A at 2024-09-29 23:38:38
+  [2024-09-29 23:38:38,652] INFO 19804[AWT-EventQueue-0] - contai.forms.LoginForm.setupPlanTrigger(LoginForm.java:358) - Frequency Type: minutes
+  [2024-09-29 23:38:38,652] INFO 19804[AWT-EventQueue-0] - contai.forms.LoginForm.setupPlanTrigger(LoginForm.java:360) - Frequency Value: 10
+  [2024-09-29 23:38:38,653] INFO 19805[AWT-EventQueue-0] - contai.forms.LoginForm.setupPlanTrigger(LoginForm.java:357) - Triggering plan: Plan B at 2024-09-29 23:38:38
+  [2024-09-29 23:38:38,653] INFO 19805[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan A at 2024-09-29 23:38:38
+  [2024-09-29 23:38:38,653] INFO 19805[AWT-EventQueue-0] - contai.forms.LoginForm.setupPlanTrigger(LoginForm.java:358) - Frequency Type: minutes
+  [2024-09-29 23:38:38,654] INFO 19806[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: minutes
+  [2024-09-29 23:38:38,654] INFO 19806[AWT-EventQueue-0] - contai.forms.LoginForm.setupPlanTrigger(LoginForm.java:360) - Frequency Value: 10
+  [2024-09-29 23:38:38,654] INFO 19806[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:421) - Frequency Value: 10
+  [2024-09-29 23:38:38,655] INFO 19807[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:437) - Executing actions for Plan A with frequency type: minutes and value: 10
+  [2024-09-29 23:38:38,655] INFO 19807[AWT-EventQueue-0] - contai.forms.LoginForm.setupPlanTrigger(LoginForm.java:357) - Triggering plan: Plan C at 2024-09-29 23:38:38
+  [2024-09-29 23:38:38,655] INFO 19807[AWT-EventQueue-0] - contai.forms.LoginForm.setupPlanTrigger(LoginForm.java:358) - Frequency Type: minutes
+  [2024-09-29 23:38:38,655] INFO 19807[AWT-EventQueue-0] - contai.forms.LoginForm.setupPlanTrigger(LoginForm.java:360) - Frequency Value: 10
+  [2024-09-29 23:38:38,656] INFO 19808[AWT-EventQueue-0] - contai.forms.LoginForm.setupPlanTrigger(LoginForm.java:357) - Triggering plan: Plan D at 2024-09-29 23:38:38
+  [2024-09-29 23:38:38,658] INFO 19810[AWT-EventQueue-0] - contai.forms.LoginForm.setupPlanTrigger(LoginForm.java:358) - Frequency Type: minutes
+  [2024-09-29 23:38:38,658] INFO 19810[AWT-EventQueue-0] - contai.forms.LoginForm.setupPlanTrigger(LoginForm.java:360) - Frequency Value: 10
+  [2024-09-29 23:38:38,659] INFO 19811[AWT-EventQueue-0] - contai.forms.LoginForm.setupPlanTrigger(LoginForm.java:357) - Triggering plan: Plan F at 2024-09-29 23:38:38
+  [2024-09-29 23:38:38,659] INFO 19811[AWT-EventQueue-0] - contai.forms.LoginForm.setupPlanTrigger(LoginForm.java:358) - Frequency Type: always_on
+  [2024-09-29 23:38:38,660] INFO 19812[AWT-EventQueue-0] - contai.forms.LoginForm.setupPlanTrigger(LoginForm.java:362) - Frequency Value is not available for plan: Plan F
+  [2024-09-29 23:38:38,660] INFO 19812[AWT-EventQueue-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan F at 2024-09-29 23:38:38
+  [2024-09-29 23:38:38,660] INFO 19812[AWT-EventQueue-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: always_on
+  [2024-09-29 23:38:38,660] INFO 19812[AWT-EventQueue-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:423) - Frequency Value is not available for plan: Plan F
+  [2024-09-29 23:38:38,662] INFO 19814[AWT-EventQueue-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:454) - Unknown plan: Plan F
+  [2024-09-29 23:38:38,663] INFO 19815[AWT-EventQueue-0] - contai.forms.LoginForm.setupPlanTrigger(LoginForm.java:357) - Triggering plan: Plan G at 2024-09-29 23:38:38
+  [2024-09-29 23:38:38,665] INFO 19817[AWT-EventQueue-0] - contai.forms.LoginForm.setupPlanTrigger(LoginForm.java:358) - Frequency Type: always_on
+  [2024-09-29 23:38:38,665] INFO 19817[AWT-EventQueue-0] - contai.forms.LoginForm.setupPlanTrigger(LoginForm.java:362) - Frequency Value is not available for plan: Plan G
+  [2024-09-29 23:38:38,665] INFO 19817[AWT-EventQueue-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan G at 2024-09-29 23:38:38
+  [2024-09-29 23:38:38,666] INFO 19818[AWT-EventQueue-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: always_on
+  [2024-09-29 23:38:38,667] INFO 19819[AWT-EventQueue-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:423) - Frequency Value is not available for plan: Plan G
+  [2024-09-29 23:38:38,667] INFO 19819[AWT-EventQueue-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:454) - Unknown plan: Plan G
+  [2024-09-29 23:38:38,669] INFO 19821[AWT-EventQueue-0] - contai.forms.LoginForm.setupPlanTrigger(LoginForm.java:357) - Triggering plan: Plan H at 2024-09-29 23:38:38
+  [2024-09-29 23:38:38,669] INFO 19821[AWT-EventQueue-0] - contai.forms.LoginForm.setupPlanTrigger(LoginForm.java:358) - Frequency Type: minutes
+  [2024-09-29 23:38:38,669] INFO 19821[AWT-EventQueue-0] - contai.forms.LoginForm.setupPlanTrigger(LoginForm.java:360) - Frequency Value: 15
+  [2024-09-29 23:38:38,736]ERROR 19888[Timer-0] - sqw.apelspv.ApelSPV.makeApiCall(ApelSPV.java:94) - Error in ApelSPV: 
+  java.security.ProviderException: Library C:\WINDOWS\system32\eTPKCS11.dll does not exist
+	at sun.security.pkcs11.SunPKCS11.<init>(SunPKCS11.java:294)
+	at sun.security.pkcs11.SunPKCS11.<init>(SunPKCS11.java:104)
+	at sqw.apelspv.ApelSPV.makeApiCall(ApelSPV.java:55)
+	at contai.service.RestPlanService.executePlan(RestPlanService.java:18)
+	at contai.forms.LoginForm.processPlanA(LoginForm.java:473)
+	at contai.forms.LoginForm.executePlanActions(LoginForm.java:438)
+	at contai.forms.LoginForm.triggerPlan(LoginForm.java:426)
+	at contai.forms.LoginForm.access$1(LoginForm.java:395)
+	at contai.forms.LoginForm$4.run(LoginForm.java:373)
+	at java.util.TimerThread.mainLoop(Timer.java:555)
+	at java.util.TimerThread.run(Timer.java:505)
+[2024-09-29 23:38:38,742]ERROR 19894[Timer-0] - contai.service.RestPlanService.executePlan(RestPlanService.java:24) - Failed to retrieve response from API
+  [2024-09-29 23:38:40,239] INFO 21391[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan B at 2024-09-29 23:38:40
+  [2024-09-29 23:38:40,239] INFO 21391[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: minutes
+  [2024-09-29 23:38:40,239] INFO 21391[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:421) - Frequency Value: 10
+  [2024-09-29 23:38:40,239] INFO 21391[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:442) - Executing actions for Plan B with frequency type: minutes and value: 10
+  [2024-09-29 23:38:40,240] INFO 21392[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan C at 2024-09-29 23:38:40
+  [2024-09-29 23:38:40,240] INFO 21392[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: minutes
+  [2024-09-29 23:38:40,240] INFO 21392[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:421) - Frequency Value: 10
+  [2024-09-29 23:38:40,240] INFO 21392[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:446) - Executing actions for Plan C with frequency type: minutes and value: 10
+  [2024-09-29 23:38:40,240] INFO 21392[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan D at 2024-09-29 23:38:40
+  [2024-09-29 23:38:40,241] INFO 21393[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: minutes
+  [2024-09-29 23:38:40,241] INFO 21393[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:421) - Frequency Value: 10
+  [2024-09-29 23:38:40,241] INFO 21393[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:450) - Executing actions for Plan D with frequency type: minutes and value: 10
+  [2024-09-29 23:38:40,242] INFO 21394[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan F at 2024-09-29 23:38:40
+  [2024-09-29 23:38:40,242] INFO 21394[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: always_on
+  [2024-09-29 23:38:40,242] INFO 21394[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:423) - Frequency Value is not available for plan: Plan F
+  [2024-09-29 23:38:40,244] INFO 21396[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:454) - Unknown plan: Plan F
+  [2024-09-29 23:38:40,246] INFO 21398[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan G at 2024-09-29 23:38:40
+  [2024-09-29 23:38:40,246] INFO 21398[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: always_on
+  [2024-09-29 23:38:40,247] INFO 21399[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:423) - Frequency Value is not available for plan: Plan G
+  [2024-09-29 23:38:40,247] INFO 21399[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:454) - Unknown plan: Plan G
+  [2024-09-29 23:38:40,248] INFO 21400[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan H at 2024-09-29 23:38:40
+  [2024-09-29 23:38:40,248] INFO 21400[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: minutes
+  [2024-09-29 23:38:40,248] INFO 21400[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:421) - Frequency Value: 15
+  [2024-09-29 23:38:40,248] INFO 21400[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:454) - Unknown plan: Plan H
+  [2024-09-29 23:43:38,678] INFO319830[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan F at 2024-09-29 23:43:38
+  [2024-09-29 23:43:38,678] INFO319830[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: always_on
+  [2024-09-29 23:43:38,678] INFO319830[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:423) - Frequency Value is not available for plan: Plan F
+  [2024-09-29 23:43:38,678] INFO319830[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:454) - Unknown plan: Plan F
+  [2024-09-29 23:43:38,679] INFO319831[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan G at 2024-09-29 23:43:38
+  [2024-09-29 23:43:38,679] INFO319831[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: always_on
+  [2024-09-29 23:43:38,679] INFO319831[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:423) - Frequency Value is not available for plan: Plan G
+  [2024-09-29 23:43:38,679] INFO319831[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:454) - Unknown plan: Plan G
+  [2024-09-29 23:48:38,666] INFO619818[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:399) - Triggering plan: Plan A at 2024-09-29 23:48:38
+  [2024-09-29 23:48:38,666] INFO619818[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:419) - Frequency Type: minutes
+  [2024-09-29 23:48:38,667] INFO619819[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:421) - Frequency Value: 10
+  [2024-09-29 23:48:38,667] INFO619819[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:437) - Executing actions for Plan A with frequency type: minutes and value: 10
+  [2024-09-29 23:48:38,667]ERROR619819[Timer-0] - sqw.apelspv.ApelSPV.makeApiCall(ApelSPV.java:94) - Error in ApelSPV: 
+  java.security.ProviderException: Library C:\WINDOWS\system32\eTPKCS11.dll does not exist
+	at sun.security.pkcs11.SunPKCS11.<init>(SunPKCS11.java:294)
+	at sun.security.pkcs11.SunPKCS11.<init>(SunPKCS11.java:104)
+	at sqw.apelspv.ApelSPV.makeApiCall(ApelSPV.java:55)
+	at contai.service.RestPlanService.executePlan(RestPlanService.java:18)
+	at contai.forms.LoginForm.processPlanA(LoginForm.java:473)
+	at contai.forms.LoginForm.executePlanActions(LoginForm.java:438)
+	at contai.forms.LoginForm.triggerPlan(LoginForm.java:426)
+	at contai.forms.LoginForm.access$1(LoginForm.java:395)
+	at contai.forms.LoginForm$4.run(LoginForm.java:373)
+	at java.util.TimerThread.mainLoop(Timer.java:555)
+	at java.util.TimerThread.run(Timer.java:505)
+[2024-09-29 23:48:38,668]ERROR619820[Timer-0] - contai.service.RestPlanService.executePlan(RestPlanService.java:24) - Failed to retrieve response from API
+  [2024-09-29 23:59:08,959] INFO     0[AWT-EventQueue-0] - contai.service.RestLoginService.login(RestLoginService.java:54) - Response login--{"success":true,"status":200,"message":"User logged in successfully","messageCode":null,"data":{"user":{"_id":"66d57e41cc90641a7d1d6987","role":"account_admin","first_name":"Jemish","last_name":"Virani","email":"jemish.v@crestinfosystems.com","email_verified_at":"2024-09-04T05:10:51.780Z","account_status":"active","auth_provider":"local","created_at":"2024-09-02T08:58:41.870Z","updated_at":"2024-09-13T09:02:55.411Z","current_subscription":{"_id":"66ded56c45d369b632d78dca","stripe_plan":{"_id":"66debbc354b838fb3a1a0f1c","name":"Starter Plan","desktop_plans":[{"name":"Plan A","active":true,"frequency":{"type":"minutes","value":10,"dates":null},"priority":1,"_id":"66ed3d740211a2aab1ab3c01"},{"name":"Plan B","active":true,"frequency":{"type":"minutes","value":10,"dates":null},"priority":1,"_id":"66ed3d740211a2aab1ab3c02"},{"name":"Plan C","active":true,"frequency":{"type":"minutes","value":10,"dates":null},"priority":1,"_id":"66ed3d740211a2aab1ab3c03"},{"name":"Plan D","active":true,"frequency":{"type":"minutes","value":10,"dates":null},"priority":1,"_id":"66ed3d740211a2aab1ab3c04"},{"name":"Plan F","active":true,"frequency":{"type":"always_on","value":null,"dates":null},"priority":1,"_id":"66ed3d740211a2aab1ab3c05"},{"name":"Plan G","active":true,"frequency":{"type":"always_on","value":null,"dates":null},"priority":1,"_id":"66ed3d740211a2aab1ab3c06"},{"name":"Plan H","active":true,"frequency":{"type":"minutes","value":15,"dates":null},"priority":1,"_id":"66ed3d740211a2aab1ab3c07"}],"reports":["users_report","companies_report","spv_report","company_name_report","vector_fiscal_report","document_synchronization","document_signature","document_filing"]},"stripe_id":"sub_1Px4P3Gr4CH5nddEkDONIJV8","stripe_price_id":"price_1Px3bcGr4CH5nddEjtw2ZQZP","status":"active","amount":10,"trial_start_at":"2024-09-09T10:01:00.000Z","trial_end_at":"2024-10-09T10:01:00.000Z","starts_at":"2024-09-09T10:01:00.000Z","ends_at":null,"billing_cycle_type":"monthly","canceled_at":null},"stripe_customer_id":"cus_QogknNCDpEgd2k"},"cui":{"active":["36354963"],"inactive":[]},"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjZkNTdlNDFjYzkwNjQxYTdkMWQ2OTg3Iiwicm9sZSI6ImFjY291bnRfYWRtaW4iLCJpYXQiOjE3Mjc2MzQ1NDksImV4cCI6MTczMDIyNjU0OX0.YtJR01OBlaeX0KMX9TYwa-qREcrpc6rAMWZz1y6K_-o"}}
+  [2024-09-29 23:59:12,941] INFO  3982[AWT-EventQueue-0] - contai.forms.LoginForm.validateAndLogin(LoginForm.java:275) - authTokennull
+  [2024-09-29 23:59:12,944] INFO  3985[AWT-EventQueue-0] - contai.forms.LoginForm.validateAndLogin(LoginForm.java:293) - activeArray["36354963"]inactiveArray[]
+  [2024-09-29 23:59:12,945] INFO  3986[AWT-EventQueue-0] - contai.forms.LoginForm.setupPlanTrigger(LoginForm.java:364) - Triggering plan: Plan A at 2024-09-29 23:59:12
+  [2024-09-29 23:59:12,945] INFO  3986[AWT-EventQueue-0] - contai.forms.LoginForm.setupPlanTrigger(LoginForm.java:365) - Frequency Type: minutes
+  [2024-09-29 23:59:12,945] INFO  3986[AWT-EventQueue-0] - contai.forms.LoginForm.setupPlanTrigger(LoginForm.java:367) - Frequency Value: 10
+  [2024-09-29 23:59:12,946] INFO  3987[AWT-EventQueue-0] - contai.forms.LoginForm.setupPlanTrigger(LoginForm.java:364) - Triggering plan: Plan B at 2024-09-29 23:59:12
+  [2024-09-29 23:59:12,946] INFO  3987[AWT-EventQueue-0] - contai.forms.LoginForm.setupPlanTrigger(LoginForm.java:365) - Frequency Type: minutes
+  [2024-09-29 23:59:12,946] INFO  3987[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:406) - Triggering plan: Plan A at 2024-09-29 23:59:12
+  [2024-09-29 23:59:12,946] INFO  3987[AWT-EventQueue-0] - contai.forms.LoginForm.setupPlanTrigger(LoginForm.java:367) - Frequency Value: 10
+  [2024-09-29 23:59:12,947] INFO  3988[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:426) - Frequency Type: minutes
+  [2024-09-29 23:59:12,947] INFO  3988[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:428) - Frequency Value: 10
+  [2024-09-29 23:59:12,947] INFO  3988[AWT-EventQueue-0] - contai.forms.LoginForm.setupPlanTrigger(LoginForm.java:364) - Triggering plan: Plan C at 2024-09-29 23:59:12
+  [2024-09-29 23:59:12,947] INFO  3988[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:444) - Executing actions for Plan A with frequency type: minutes and value: 10
+  [2024-09-29 23:59:12,948] INFO  3989[AWT-EventQueue-0] - contai.forms.LoginForm.setupPlanTrigger(LoginForm.java:365) - Frequency Type: minutes
+  [2024-09-29 23:59:12,948] INFO  3989[AWT-EventQueue-0] - contai.forms.LoginForm.setupPlanTrigger(LoginForm.java:367) - Frequency Value: 10
+  [2024-09-29 23:59:13,006] INFO  4047[AWT-EventQueue-0] - contai.forms.LoginForm.setupPlanTrigger(LoginForm.java:364) - Triggering plan: Plan D at 2024-09-29 23:59:13
+  [2024-09-29 23:59:13,006] INFO  4047[AWT-EventQueue-0] - contai.forms.LoginForm.setupPlanTrigger(LoginForm.java:365) - Frequency Type: minutes
+  [2024-09-29 23:59:13,007] INFO  4048[AWT-EventQueue-0] - contai.forms.LoginForm.setupPlanTrigger(LoginForm.java:367) - Frequency Value: 10
+  [2024-09-29 23:59:13,007] INFO  4048[AWT-EventQueue-0] - contai.forms.LoginForm.setupPlanTrigger(LoginForm.java:364) - Triggering plan: Plan F at 2024-09-29 23:59:13
+  [2024-09-29 23:59:13,007] INFO  4048[AWT-EventQueue-0] - contai.forms.LoginForm.setupPlanTrigger(LoginForm.java:365) - Frequency Type: always_on
+  [2024-09-29 23:59:13,007] INFO  4048[AWT-EventQueue-0] - contai.forms.LoginForm.setupPlanTrigger(LoginForm.java:369) - Frequency Value is not available for plan: Plan F
+  [2024-09-29 23:59:13,008] INFO  4049[AWT-EventQueue-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:406) - Triggering plan: Plan F at 2024-09-29 23:59:13
+  [2024-09-29 23:59:13,008] INFO  4049[AWT-EventQueue-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:426) - Frequency Type: always_on
+  [2024-09-29 23:59:13,008] INFO  4049[AWT-EventQueue-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:430) - Frequency Value is not available for plan: Plan F
+  [2024-09-29 23:59:13,008] INFO  4049[AWT-EventQueue-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:461) - Unknown plan: Plan F
+  [2024-09-29 23:59:13,009] INFO  4050[AWT-EventQueue-0] - contai.forms.LoginForm.setupPlanTrigger(LoginForm.java:364) - Triggering plan: Plan G at 2024-09-29 23:59:13
+  [2024-09-29 23:59:13,009] INFO  4050[AWT-EventQueue-0] - contai.forms.LoginForm.setupPlanTrigger(LoginForm.java:365) - Frequency Type: always_on
+  [2024-09-29 23:59:13,009] INFO  4050[AWT-EventQueue-0] - contai.forms.LoginForm.setupPlanTrigger(LoginForm.java:369) - Frequency Value is not available for plan: Plan G
+  [2024-09-29 23:59:13,010] INFO  4051[AWT-EventQueue-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:406) - Triggering plan: Plan G at 2024-09-29 23:59:13
+  [2024-09-29 23:59:13,010] INFO  4051[AWT-EventQueue-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:426) - Frequency Type: always_on
+  [2024-09-29 23:59:13,010] INFO  4051[AWT-EventQueue-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:430) - Frequency Value is not available for plan: Plan G
+  [2024-09-29 23:59:13,010] INFO  4051[AWT-EventQueue-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:461) - Unknown plan: Plan G
+  [2024-09-29 23:59:13,012] INFO  4053[AWT-EventQueue-0] - contai.forms.LoginForm.setupPlanTrigger(LoginForm.java:364) - Triggering plan: Plan H at 2024-09-29 23:59:13
+  [2024-09-29 23:59:13,012] INFO  4053[AWT-EventQueue-0] - contai.forms.LoginForm.setupPlanTrigger(LoginForm.java:365) - Frequency Type: minutes
+  [2024-09-29 23:59:13,013] INFO  4054[AWT-EventQueue-0] - contai.forms.LoginForm.setupPlanTrigger(LoginForm.java:367) - Frequency Value: 15
+  [2024-09-29 23:59:13,075]ERROR  4116[Timer-0] - sqw.apelspv.ApelSPV.makeApiCall(ApelSPV.java:94) - Error in ApelSPV: 
+  java.security.ProviderException: Library C:\WINDOWS\system32\eTPKCS11.dll does not exist
+	at sun.security.pkcs11.SunPKCS11.<init>(SunPKCS11.java:294)
+	at sun.security.pkcs11.SunPKCS11.<init>(SunPKCS11.java:104)
+	at sqw.apelspv.ApelSPV.makeApiCall(ApelSPV.java:55)
+	at contai.service.RestPlanService.executePlan(RestPlanService.java:18)
+	at contai.forms.LoginForm.processPlanA(LoginForm.java:480)
+	at contai.forms.LoginForm.executePlanActions(LoginForm.java:445)
+	at contai.forms.LoginForm.triggerPlan(LoginForm.java:433)
+	at contai.forms.LoginForm.access$1(LoginForm.java:402)
+	at contai.forms.LoginForm$4.run(LoginForm.java:380)
+	at java.util.TimerThread.mainLoop(Timer.java:555)
+	at java.util.TimerThread.run(Timer.java:505)
+[2024-09-29 23:59:13,079]ERROR  4120[Timer-0] - contai.service.RestPlanService.executePlan(RestPlanService.java:24) - Failed to retrieve response from API
+  [2024-09-29 23:59:14,710] WARN  5751[Timer-0] - contai.forms.LoginForm.processPlanA(LoginForm.java:530) - Error--java.lang.NullPointerException
+  [2024-09-29 23:59:14,710] INFO  5751[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:406) - Triggering plan: Plan B at 2024-09-29 23:59:14
+  [2024-09-29 23:59:14,710] INFO  5751[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:426) - Frequency Type: minutes
+  [2024-09-29 23:59:14,711] INFO  5752[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:428) - Frequency Value: 10
+  [2024-09-29 23:59:14,711] INFO  5752[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:449) - Executing actions for Plan B with frequency type: minutes and value: 10
+  [2024-09-29 23:59:14,711] INFO  5752[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:406) - Triggering plan: Plan C at 2024-09-29 23:59:14
+  [2024-09-29 23:59:14,712] INFO  5753[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:426) - Frequency Type: minutes
+  [2024-09-29 23:59:14,712] INFO  5753[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:428) - Frequency Value: 10
+  [2024-09-29 23:59:14,712] INFO  5753[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:453) - Executing actions for Plan C with frequency type: minutes and value: 10
+  [2024-09-29 23:59:14,712] INFO  5753[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:406) - Triggering plan: Plan D at 2024-09-29 23:59:14
+  [2024-09-29 23:59:14,712] INFO  5753[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:426) - Frequency Type: minutes
+  [2024-09-29 23:59:14,712] INFO  5753[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:428) - Frequency Value: 10
+  [2024-09-29 23:59:14,713] INFO  5754[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:457) - Executing actions for Plan D with frequency type: minutes and value: 10
+  [2024-09-29 23:59:14,713] INFO  5754[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:406) - Triggering plan: Plan F at 2024-09-29 23:59:14
+  [2024-09-29 23:59:14,713] INFO  5754[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:426) - Frequency Type: always_on
+  [2024-09-29 23:59:14,713] INFO  5754[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:430) - Frequency Value is not available for plan: Plan F
+  [2024-09-29 23:59:14,713] INFO  5754[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:461) - Unknown plan: Plan F
+  [2024-09-29 23:59:14,714] INFO  5755[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:406) - Triggering plan: Plan G at 2024-09-29 23:59:14
+  [2024-09-29 23:59:14,714] INFO  5755[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:426) - Frequency Type: always_on
+  [2024-09-29 23:59:14,714] INFO  5755[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:430) - Frequency Value is not available for plan: Plan G
+  [2024-09-29 23:59:14,714] INFO  5755[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:461) - Unknown plan: Plan G
+  [2024-09-29 23:59:14,714] INFO  5755[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:406) - Triggering plan: Plan H at 2024-09-29 23:59:14
+  [2024-09-29 23:59:14,714] INFO  5755[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:426) - Frequency Type: minutes
+  [2024-09-29 23:59:14,714] INFO  5755[Timer-0] - contai.forms.LoginForm.triggerPlan(LoginForm.java:428) - Frequency Value: 15
+  [2024-09-29 23:59:14,715] INFO  5756[Timer-0] - contai.forms.LoginForm.executePlanActions(LoginForm.java:461) - Unknown plan: Plan H
+  
