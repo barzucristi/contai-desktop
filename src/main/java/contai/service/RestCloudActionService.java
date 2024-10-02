@@ -21,8 +21,8 @@ public class RestCloudActionService {
 
     public static JsonObject sendCuiData(JsonArray newCuiArray, JsonArray inactiveCuiArray,String authToken) throws IOException {
         HttpURLConnection connection = null;
-        logger.error("active Array:--: " + newCuiArray);
-        logger.error("inactive Array:--: " + inactiveCuiArray);
+        logger.error("1)active Array:--: " + newCuiArray);
+        logger.error("2)inactive Array:--: " + inactiveCuiArray);
         try {
             URL url = new URL(CLOUD_ACTION_URL);
             connection = (HttpURLConnection) url.openConnection();

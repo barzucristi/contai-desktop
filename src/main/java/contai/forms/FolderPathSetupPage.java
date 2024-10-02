@@ -102,6 +102,9 @@ public class FolderPathSetupPage {
     }
     
     
+    
+    
+    
     private void handleAutomaticUpload() {
         if (!new File(PDF_PATH_SIGNED).exists()) {
             System.out.println("Error: Signed PDF file not found.");

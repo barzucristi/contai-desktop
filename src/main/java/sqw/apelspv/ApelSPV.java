@@ -71,24 +71,23 @@ public class ApelSPV {
             HttpsURLConnection.setDefaultHostnameVerifier((hostname, session) -> true);
 
             CookieHandler.setDefault(new CookieManager());
-            LOGGER.error("A============");
             SSLSocketFactory factory = sslContext.getSocketFactory();
             socket = createSocket();
-            InetSocketAddress dest = new InetSocketAddress("webserviced.anaf.ro", 443);
-            LOGGER.error("b============");
+            InetSocketAddress dest = new InetSocketAddress("webserviced.anaf.ro", 443);        
+            
             try {
                 socket.connect(dest);
             } catch (IOException e) {
                 LOGGER.error("Failed to connect to " + dest + ": ", e);
             }
-            LOGGER.error("c============");
+           
             sslSocket = (SSLSocket) factory.createSocket(socket, socket.getInetAddress().getHostName(),
                     socket.getPort(), true);
             sslSocket.setUseClientMode(true);
             sslSocket.setSoTimeout(100000);
             sslSocket.setKeepAlive(true);
             sslSocket.startHandshake();
-            LOGGER.error("d============");
+         
             return makeApiRequest(apiUrl, sslSocket, factory);
 
         } catch (Exception e) {
@@ -119,7 +118,7 @@ public class ApelSPV {
         HttpsURLConnection con = null;
         
         try {
-        	  LOGGER.error("e============");
+        	 
            
             URL obj = new URL(apiUrl);
             con = (HttpsURLConnection) obj.openConnection();
@@ -140,11 +139,20 @@ public class ApelSPV {
                 }
 
                 // Only parse if content type is JSON
-                if (contentType != null && contentType.contains("application/json")) {
-                    jsonResponse = new JsonParser().parse(responseBuilder.toString()).getAsJsonObject();
+                if (contentType != null) {
+                    if (contentType.contains("application/json")) {
+                        // Parse JSON response
+                        jsonResponse =new JsonParser().parse(responseBuilder.toString()).getAsJsonObject();
+                    } else if (contentType.contains("text/html")) {
+         
+                        jsonResponse =new JsonParser().parse(responseBuilder.toString()).getAsJsonObject();
+                    } else {
+                        // Handle unexpected content types
+                        LOGGER.warn("Unexpected content type: " + contentType);
+                        LOGGER.warn("Response: " + responseBuilder.toString());
+                    }
                 } else {
-                    LOGGER.error("Unexpected content type: " + contentType);
-                    LOGGER.error("Response: " + responseBuilder.toString());
+                    LOGGER.warn("Content type is null.");
                 }
             } else {
                 LOGGER.error("HTTP error code: " + responseCode);
@@ -181,7 +189,7 @@ public class ApelSPV {
 
 
     private void listAllCertificates(KeyStore ks) throws Exception {
-        LOGGER.info("Listing all certificates in the Windows certificate store:");
+//        LOGGER.info("Listing all certificates in the Windows certificate store:");
 
         // Get the aliases from the KeyStore
         java.util.Enumeration<String> aliases = ks.aliases();
@@ -192,18 +200,18 @@ public class ApelSPV {
             // Get the certificate associated with the alias
             X509Certificate cert = (X509Certificate) ks.getCertificate(alias);
             
-            // Log certificate information
-            if (cert != null) {
-                LOGGER.info("Certificate Information:");
-                LOGGER.info("Subject: " + cert.getSubjectDN().getName());
-                LOGGER.info("Issuer: " + cert.getIssuerDN().getName());
-                LOGGER.info("Serial Number: " + cert.getSerialNumber());
-                LOGGER.info("Signature Algorithm: " + cert.getSigAlgName());
-                LOGGER.info("Valid From: " + cert.getNotBefore());
-                LOGGER.info("Valid Until: " + cert.getNotAfter());
-            } else {
-                LOGGER.warn("No certificate found for alias: " + alias);
-            }
+//            // Log certificate information
+//            if (cert != null) {
+//                LOGGER.info("Certificate Information:");
+//                LOGGER.info("Subject: " + cert.getSubjectDN().getName());
+//                LOGGER.info("Issuer: " + cert.getIssuerDN().getName());
+//                LOGGER.info("Serial Number: " + cert.getSerialNumber());
+//                LOGGER.info("Signature Algorithm: " + cert.getSigAlgName());
+//                LOGGER.info("Valid From: " + cert.getNotBefore());
+//                LOGGER.info("Valid Until: " + cert.getNotAfter());
+//            } else {
+//                LOGGER.warn("No certificate found for alias: " + alias);
+//            }
         }
     }
 

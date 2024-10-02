@@ -25,10 +25,8 @@ public class LoginForm {
     private Timer timer;
     private JsonObject userData;
     private String authToken;
-    private JsonArray CuiData;
-    private Set<String> currentCuiSet = new HashSet<>();
-    private Set<String> inactiveCuiSet = new HashSet<>();
-
+    private JsonArray CuiData = new JsonArray();
+  
     public LoginForm(JFrame parentFrame) {
         this.parentFrame = parentFrame;
         this.timer = new Timer();
@@ -275,33 +273,22 @@ public class LoginForm {
                           } else {
                               logger.warn("Token not found in response data.");
                           }
-                        logger.info("authToken"+authToken);
+                       
                         userData = Data.getAsJsonObject("user");
                         JsonObject cui = Data.getAsJsonObject("cui");
                         
-                        // Ensure CuiData is initialized
-                        if (CuiData == null) {
-                            CuiData = new JsonArray(); // Initialize if null
-                        }
-
+                       
                         if (cui != null) {
                             JsonArray activeArray = cui.has("active") && cui.get("active").isJsonArray()
                                 ? cui.getAsJsonArray("active")
                                 : new JsonArray();
-
-                            JsonArray inactiveArray = cui.has("inactive") && cui.get("inactive").isJsonArray()
-                                ? cui.getAsJsonArray("inactive")
-                                : new JsonArray();
-
-                            logger.info("activeArray" +activeArray + "inactiveArray" + inactiveArray);  
-                            // Merge active and inactive arrays into CuiData
+                          
                             for (JsonElement element : activeArray) {
-                                CuiData.add(element);  // Merge active elements
-                            }
-                            for (JsonElement element : inactiveArray) {
-                                CuiData.add(element);  // Merge inactive elements
-                            }
-
+                            	  if (element.isJsonPrimitive()) {
+                            		  CuiData.add(element); 
+                            	  }
+                            }    
+                                                 
                             setupPlans();
                             FolderPathSetupPage folderPathSetupPage = new FolderPathSetupPage(parentFrame);
                             JPanel folderPathSetupPanel = folderPathSetupPage.getPanel();
@@ -444,67 +431,83 @@ public class LoginForm {
         private void executePlanActions(String planName, String frequencyType, Integer frequencyValue) {
             switch (planName) {
                 case "Plan A":
-                   	logger.info("Executing actions for Plan A with frequency type: " + frequencyType + " and value: " + frequencyValue);
+//                   	logger.info("Executing actions for Plan A with frequency type: " + frequencyType + " and value: " + frequencyValue);
                 	processPlanA();
                     break;
                 case "Plan B":
                     // Trigger specific actions for Plan B
-                	logger.info("Executing actions for Plan B with frequency type: " + frequencyType + " and value: " + frequencyValue);
+//                	logger.info("Executing actions for Plan B with frequency type: " + frequencyType + " and value: " + frequencyValue);
                     break;
                 case "Plan C":
+                	processPlanC();
                     // Trigger specific actions for Plan C
-                	logger.info("Executing actions for Plan C with frequency type: " + frequencyType + " and value: " + frequencyValue);
+//                	logger.info("Executing actions for Plan C with frequency type: " + frequencyType + " and value: " + frequencyValue);
                     break;
                 case "Plan D":
+                	processPlanD(); 
                     // Trigger specific actions for Plan D
-                	logger.info("Executing actions for Plan D with frequency type: " + frequencyType + " and value: " + frequencyValue);
+//                	logger.info("Executing actions for Plan D with frequency type: " + frequencyType + " and value: " + frequencyValue);
                     break;
                 // Add cases for other plans as needed
                 default:
-                	logger.info("Unknown plan: " + planName);
+//                	logger.info("Unknown plan: " + planName);
                     break;
             }
         }
 
         private void processPlanA() {
             try {
-                // First, use existing CuiData
                 Set<String> currentIterationCuiSet = new HashSet<>();
+                Set<String> currentCuiSet = new HashSet<>();
+
+                // First, use existing CuiData
+                logger.info("CuiData response---"+CuiData);
+               
                 if (CuiData != null) {
                     for (JsonElement element : CuiData) {
                         if (element.isJsonPrimitive()) {
                             String cui = element.getAsString();
-                            currentIterationCuiSet.add(cui.trim());
+                            currentCuiSet.add(cui.trim());
                         }
                     }
                 }
 
+                
+          
                 // Then, check from API
                 JsonObject response = RestPlanService.executePlan("https://webserviced.anaf.ro/SPVWS2/rest/listaMesaje?zile=500");               
                 String cuiString = response.get("cui").getAsString();
-                logger.info(cuiString);
+                logger.info("api cui response-------"+cuiString);
                 // Split the CUI string into an array and add to currentIterationCuiSet
                 String[] cuiArray = cuiString.split(",");
                 for (String cui : cuiArray) {
                     currentIterationCuiSet.add(cui.trim());
                 }
 
+                logger.info("currentIterationCuiSet response---"+currentIterationCuiSet);
+                logger.info("currentCuiSet response---"+currentCuiSet);
                 // Determine new CUIs and inactive CUIs
                 Set<String> newCuis = new HashSet<>();
-                Set<String> inactiveCuis = new HashSet<>(currentCuiSet); // Start with all current CUIs
-
-                // Find new CUIs and remove still-active CUIs from inactiveCuis
+                Set<String> inactiveCuis = new HashSet<>(); 
+               
+               
                 for (String cui : currentIterationCuiSet) {
-                    if (!currentCuiSet.contains(cui)) {
-                        newCuis.add(cui); // This CUI is new
-                    } else {
-                        inactiveCuis.remove(cui); // This CUI is still active
+                    if (!currentCuiSet.contains(cui)) {                   	
+                    	  newCuis.add(cui);                     
                     }
+
+                }
+                
+                for (String cui : currentCuiSet) {
+                    if (!currentIterationCuiSet.contains(cui)) {                   	
+                    	inactiveCuis.add(cui);                      
+                    }
+
                 }
 
                 // Update currentCuiSet and inactiveCuiSet
                 currentCuiSet.addAll(newCuis);
-                inactiveCuiSet.addAll(inactiveCuis);
+             
 
                 // Create JSON arrays for new and inactive CUIs
                 JsonArray newCuiArray = new JsonArray();
@@ -518,6 +521,7 @@ public class LoginForm {
                     inactiveCuiArray.add(inactiveCui);
                 }
 
+                logger.info("final newCuiArray"+newCuiArray +"inactiveCuiArray-->"+ inactiveCuiArray);
                 // Send data to cloud service
                 JsonObject apiResponse = RestCloudActionService.sendCuiData(newCuiArray, inactiveCuiArray,authToken);
 
@@ -535,6 +539,71 @@ public class LoginForm {
             }
         }
       
+        private void processPlanC() {
+            try {
+                Set<String> currentCuiSet = new HashSet<>();
+
+               
+               
+                if (CuiData != null) {
+                    for (JsonElement element : CuiData) {
+                        if (element.isJsonPrimitive()) {
+                            String cui = element.getAsString();
+                            currentCuiSet.add(cui.trim());
+                        }
+                    }
+                }
+
+     
+                
+                for (String cui : currentCuiSet) {
+                	 logger.info("plan c cui req---"+cui);
+                    JsonObject response = RestPlanService.executePlan("https://webserviced.anaf.ro/SPVWS2/rest/cerere?tip=VECTOR%20FISCAL&cui="+cui.trim());               
+                    logger.info("plan c cui res---"+response);
+                }
+   
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(panel, e.getMessage(), "Response", JOptionPane.ERROR_MESSAGE);
+                e.printStackTrace();
+                logger.warn("Error--"+e);
+                
+            }
+        }
+        
+        
+        private void processPlanD() {
+            try {
+                Set<String> currentCuiSet = new HashSet<>();
+
+               
+               
+                if (CuiData != null) {
+                    for (JsonElement element : CuiData) {
+                        if (element.isJsonPrimitive()) {
+                            String cui = element.getAsString();
+                            currentCuiSet.add(cui.trim());
+                        }
+                    }
+                }
+
+     
+                
+                for (String cui : currentCuiSet) {
+                	 logger.info("plan d cui req---"+cui);
+                    JsonObject response = RestPlanService.executePlan("https://webserviced.anaf.ro/SPVWS2/rest/cerere?tip=Fisa%20Rol&cui="+cui.trim());               
+                    logger.info("plan d cui res---"+response);
+                }
+   
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(panel, e.getMessage(), "Response", JOptionPane.ERROR_MESSAGE);
+                e.printStackTrace();
+                logger.warn("Error--"+e);
+                
+            }
+        }
+        
         public void cleanup() {
             if (timer != null) {
                 timer.cancel();
