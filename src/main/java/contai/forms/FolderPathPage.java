@@ -8,7 +8,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
-import com.google.gson.JsonObject;
+
 
 public class FolderPathPage {
 
@@ -46,7 +46,7 @@ public class FolderPathPage {
         JPanel folderPanel = new JPanel(new GridBagLayout());
         folderPanel.setBackground(Color.WHITE);
         GridBagConstraints gbc1 = new GridBagConstraints();
-        gbc1.insets = new Insets(50, 50, 50, 50); // Set 50-pixel margin around folder panels
+        gbc1.insets = new Insets(50, 50, 50, 50); 
         gbc1.fill = GridBagConstraints.HORIZONTAL;
 
         JPanel folder1 = createFolderSelectionPanel("Windows//Disk D://My Files//Folder1", "/images/bi_folder.png", false);
@@ -63,7 +63,7 @@ public class FolderPathPage {
         gbc1.gridx = 2;
         folderPanel.add(folder3, gbc1);
 
-     
+       
         JButton saveButton = new JButton("Save");
         saveButton.setBackground(Color.decode("#2979FF"));
         saveButton.setForeground(Color.WHITE);
@@ -71,26 +71,39 @@ public class FolderPathPage {
         Border saveInnerBorder = new EmptyBorder(10,50,10,50); 
         saveButton.setBorder(BorderFactory.createCompoundBorder(outerBorder, saveInnerBorder));
         saveButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        
+
+      
         ImageIcon originalIcon = new ImageIcon(getClass().getResource("/images/solar_folder-path-connect-broken.png"));
         Image scaledImage = originalIcon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         ImageIcon folderIcon = new ImageIcon(scaledImage);
 
-      
         JButton customPathButton = new JButton("Custom Path", folderIcon);
         customPathButton.setBackground(Color.WHITE);
         customPathButton.setForeground(Color.decode("#2979FF"));
         customPathButton.setBorder(BorderFactory.createLineBorder(Color.decode("#2979FF"), 2));
-
-      
         customPathButton.setHorizontalTextPosition(SwingConstants.RIGHT); 
         customPathButton.setVerticalTextPosition(SwingConstants.CENTER); 
         Border customPathInnerBorder = new EmptyBorder(8,20,8,20); 
         customPathButton.setBorder(BorderFactory.createCompoundBorder(outerBorder, customPathInnerBorder));
         customPathButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
+      
+        JPanel buttonPanel = new JPanel(new FlowLayout());
+        buttonPanel.setBackground(Color.WHITE);
+        buttonPanel.add(saveButton);
+        buttonPanel.add(customPathButton);
+
+      
+        GridBagConstraints buttonPanelGbc = new GridBagConstraints();
+        buttonPanelGbc.insets = new Insets(100, 0, 0, 0); 
+        buttonPanelGbc.gridx = 0;
+        buttonPanelGbc.gridy = 4; 
+        buttonPanelGbc.gridwidth = 2;
 
        
+        panel.add(buttonPanel, buttonPanelGbc);
+
+      
         GridBagConstraints mainGbc = new GridBagConstraints();
         mainGbc.insets = new Insets(5, 0, 5, 0);
         mainGbc.gridx = 0;
@@ -105,14 +118,6 @@ public class FolderPathPage {
 
         mainGbc.gridy = 3;
         panel.add(folderPanel, mainGbc);
-
-        JPanel buttonPanel = new JPanel(new FlowLayout());
-        buttonPanel.setBackground(Color.WHITE);
-        buttonPanel.add(saveButton);
-        buttonPanel.add(customPathButton);
-
-        mainGbc.gridy = 4;
-        panel.add(buttonPanel, mainGbc);
 
         return panel;
     }
