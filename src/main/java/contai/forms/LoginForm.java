@@ -190,7 +190,7 @@ public class LoginForm {
         loginPanel.add(googleSignInButton, gbc);
 
         // Footer
-        JLabel footerLabel = new JLabel("© Example 2024");
+        JLabel footerLabel = new JLabel("ï¿½ Example 2024");
         footerLabel.setFont(new Font("Poppins", Font.PLAIN, 14));
         footerLabel.setForeground(Color.decode("#333333"));
         GridBagConstraints footerGbc = new GridBagConstraints();
@@ -290,7 +290,7 @@ public class LoginForm {
                             }    
                                                  
                             setupPlans();
-                            FolderPathSetupPage folderPathSetupPage = new FolderPathSetupPage(parentFrame);
+                            FolderPathPage folderPathSetupPage = new FolderPathPage(parentFrame);
                             JPanel folderPathSetupPanel = folderPathSetupPage.getPanel();
                             parentFrame.setContentPane(folderPathSetupPanel);
                             parentFrame.revalidate();
