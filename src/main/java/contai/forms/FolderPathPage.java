@@ -76,10 +76,9 @@ public class FolderPathPage {
     private void secureHotFolder() {
         try {
             File hotFolder = new File(hotFolderPath);
-            
 
             if (System.getProperty("os.name").toLowerCase().contains("win")) {
-                String command = "icacls \"" + hotFolderPath + "\" /inheritance:r /grant:r \"Users:R\" /T";
+                String command = "icacls \"" + hotFolderPath + "\" /inheritance:r /deny \"Users:(D)\" /grant:r \"Users:(RX)\" /T";
                 Process process = Runtime.getRuntime().exec(command);
                 int exitCode = process.waitFor();
 
@@ -94,13 +93,14 @@ public class FolderPathPage {
             }
         } catch (Exception e) {
             System.out.println("Failed to secure hot folder: " + e.getMessage());
-            JOptionPane.showMessageDialog(parentFrame,
-                "Unable to fully secure the hot folder. Please ensure you have the necessary permissions.\n" +
-                "The application will continue, but the hot folder may be editable.",
-                "Security Warning",
-                JOptionPane.WARNING_MESSAGE);
+//            JOptionPane.showMessageDialog(parentFrame,
+//                "Unable to fully secure the hot folder. Please ensure you have the necessary permissions.\n" +
+//                "The application will continue, but the hot folder may be editable or deletable.",
+//                "Security Warning",
+//                JOptionPane.WARNING_MESSAGE);
         }
     }
+
 
 
     public JPanel getPanel() {
