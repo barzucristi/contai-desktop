@@ -1,23 +1,107 @@
 package contai.forms;
 
-import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
-
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Image;
+import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.attribute.PosixFilePermissions;
 
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 
 public class FolderPathPage {
 
     private JPanel panel;
     private JFrame parentFrame;
+    private String username;
+    private String hotFolderPath;
+    private String signedDocsFolderPath;
+    private String spvDocsFolderPath;
+   
  
     public FolderPathPage(JFrame parentFrame) {
         this.parentFrame = parentFrame;
+        this.username = System.getProperty("user.name");
+        this.hotFolderPath = "C:\\Users\\" + username + "\\Desktop\\Declaratii nesemnate";
+        this.signedDocsFolderPath = "C:\\Documents\\contai\\declaratii semnate";
+        this.spvDocsFolderPath = "C:\\Documents\\contai\\documente SPV";
+        createFolders();
     }
+
+    private void createFolders() {
+        createFolder(hotFolderPath);
+        createFolder(signedDocsFolderPath);
+        createFolder(spvDocsFolderPath);
+        secureHotFolder();
+    }
+
+    private void createFolder(String path) {
+        File folder = new File(path);
+        if (!folder.exists()) {
+            try {
+                if (folder.mkdirs()) {
+                    System.out.println("Folder created: " + path);
+                } else {
+                    System.out.println("Failed to create folder: " + path);
+                    JOptionPane.showMessageDialog(parentFrame, "Failed to create folder: " + path, "Folder Creation Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (Exception e) {
+                System.out.println("Exception while creating folder: " + e.getMessage());
+            }
+        } else {
+            System.out.println("Folder already exists: " + path);
+        }
+    }
+
+
+    private void secureHotFolder() {
+        try {
+            File hotFolder = new File(hotFolderPath);
+            
+
+            if (System.getProperty("os.name").toLowerCase().contains("win")) {
+                String command = "icacls \"" + hotFolderPath + "\" /inheritance:r /grant:r \"Users:R\" /T";
+                Process process = Runtime.getRuntime().exec(command);
+                int exitCode = process.waitFor();
+
+                if (exitCode == 0) {
+                    System.out.println("Hot folder secured successfully.");
+                } else {
+                    throw new Exception("icacls failed with exit code: " + exitCode);
+                }
+            } else {
+                Files.setPosixFilePermissions(hotFolder.toPath(), PosixFilePermissions.fromString("r-xr-xr-x"));
+                System.out.println("Hot folder secured successfully on Unix.");
+            }
+        } catch (Exception e) {
+            System.out.println("Failed to secure hot folder: " + e.getMessage());
+            JOptionPane.showMessageDialog(parentFrame,
+                "Unable to fully secure the hot folder. Please ensure you have the necessary permissions.\n" +
+                "The application will continue, but the hot folder may be editable.",
+                "Security Warning",
+                JOptionPane.WARNING_MESSAGE);
+        }
+    }
+
 
     public JPanel getPanel() {
         panel = new JPanel(new GridBagLayout());
@@ -49,9 +133,9 @@ public class FolderPathPage {
         gbc1.insets = new Insets(50, 50, 50, 50); 
         gbc1.fill = GridBagConstraints.HORIZONTAL;
 
-        JPanel folder1 = createFolderSelectionPanel("Windows//Disk D://My Files//Folder1", "/images/bi_folder.png", false);
-        JPanel folder2 = createFolderSelectionPanel("Windows//Disk D://My Files//Folder2", "/images/bi_folder_change.png", true);
-        JPanel folder3 = createFolderSelectionPanel("Windows//Disk D://My Files//Folder3", "/images/bi_folder_change.png", true);
+        JPanel folder1 = createFolderSelectionPanel(hotFolderPath, "/images/bi_folder.png", false);
+        JPanel folder2 = createFolderSelectionPanel(signedDocsFolderPath, "/images/bi_folder_change.png", true);
+        JPanel folder3 = createFolderSelectionPanel(spvDocsFolderPath, "/images/bi_folder_change.png", true);
 
         gbc1.gridx = 0;
         gbc1.gridy = 0;
