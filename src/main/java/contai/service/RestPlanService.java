@@ -1,10 +1,13 @@
 package contai.service;
 
+import java.io.File;
+
 import org.apache.log4j.Logger;
 
 import com.google.gson.JsonObject;
 
 import sqw.apelspv.ApelSPV;
+import sqw.apelspv.ApelSPVFile;
 
 public class RestPlanService {
 
@@ -28,4 +31,23 @@ public class RestPlanService {
       
         return response; // Return the list of CUI values
     }
+    
+    
+    public static File getFile(String apiUrl, String destinationPath) {
+        ApelSPVFile apelSPV = new ApelSPVFile(); // Create an instance of ApelSPV
+
+        // Call the API and get the response
+        File pdfFile = apelSPV.makeApiCall(apiUrl, destinationPath);
+
+        // Log the response
+        if (pdfFile != null) {
+            LOGGER.info("PDF file saved at: " + pdfFile.getAbsolutePath());
+        } else {
+            LOGGER.error("Failed to retrieve PDF from API");
+            return null; // Return null if no response
+        }
+
+        return pdfFile; // Return the PDF file
+    }
+
 }

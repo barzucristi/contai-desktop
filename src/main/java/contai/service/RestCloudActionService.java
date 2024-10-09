@@ -17,14 +17,15 @@ import com.google.gson.JsonParser;
 public class RestCloudActionService {
 
     private static final Logger logger = Logger.getLogger(RestCloudActionService.class);
-    private static final String CLOUD_ACTION_URL = "https://spv-dev.contai.ro/api/cloud-actions/1";
+    private static final String CLOUD_ACTION_URL_1 = "https://spv-dev.contai.ro/api/cloud-actions/1";
+    private static final String CLOUD_ACTION_URL_2 = "https://spv-dev.contai.ro/api/cloud-actions/2";
 
     public static JsonObject sendCuiData(JsonArray newCuiArray, JsonArray inactiveCuiArray,String authToken) throws IOException {
         HttpURLConnection connection = null;
         logger.error("1)active Array:--: " + newCuiArray);
         logger.error("2)inactive Array:--: " + inactiveCuiArray);
         try {
-            URL url = new URL(CLOUD_ACTION_URL);
+            URL url = new URL(CLOUD_ACTION_URL_1);
             connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("POST");
             connection.setRequestProperty("Content-Type", "application/json");
@@ -67,6 +68,58 @@ public class RestCloudActionService {
                 
                 logger.error("response: " + response.toString());
             	return new JsonParser().parse(response.toString()).getAsJsonObject();
+            }
+        } finally {
+            if (connection != null) {
+                connection.disconnect();
+            }
+        }
+    }
+    
+    
+    public static JsonObject sendMesajeData(JsonArray mesajeArr, String authToken) throws IOException {
+        HttpURLConnection connection = null;
+        logger.info("Sending messages data: " + mesajeArr);
+
+        try {
+            URL url = new URL(CLOUD_ACTION_URL_2);
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("POST");
+            connection.setRequestProperty("Content-Type", "application/json");
+            connection.setRequestProperty("Accept", "application/json");
+            connection.setRequestProperty("Cookie", "token=" + authToken);
+            connection.setDoOutput(true);
+
+            // Construct the JSON request body
+            JsonObject jsonRequest = new JsonObject();
+            jsonRequest.add("messages", mesajeArr);
+
+            // Send request body
+            try (OutputStream os = connection.getOutputStream()) {
+                os.write(jsonRequest.toString().getBytes(StandardCharsets.UTF_8));
+                os.flush();
+            }
+
+            // Read response
+            int responseCode = connection.getResponseCode();
+            InputStream stream = responseCode == HttpURLConnection.HTTP_OK
+                    ? connection.getInputStream()
+                    : connection.getErrorStream();
+
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8))) {
+                StringBuilder response = new StringBuilder();
+                String responseLine;
+                while ((responseLine = br.readLine()) != null) {
+                    response.append(responseLine.trim());
+                }
+                logger.info("Response received: " + response.toString());
+
+                if (responseCode == HttpURLConnection.HTTP_UNAUTHORIZED) {
+                    logger.error("Session expired: " + response.toString());
+                    return null;
+                }
+
+                return new JsonParser().parse(response.toString()).getAsJsonObject();
             }
         } finally {
             if (connection != null) {

@@ -218,22 +218,33 @@ public class FolderPathPage {
         pathField.setEditable(isEditable); 
         pathField.setPreferredSize(new Dimension(200, 30));
 
-      
+        // Add mouse listener to the folder icon if editable
         if (isEditable) {
             folderIcon.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
+                    // Change icon size on click
                     ImageIcon clickedIcon = new ImageIcon(originalIcon.getImage().getScaledInstance(122, 145, Image.SCALE_SMOOTH));
                     folderIcon.setIcon(clickedIcon);
 
-                   
+                    // Create a file chooser that allows files and directories
                     JFileChooser fileChooser = new JFileChooser();
-                    fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                    fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+                    
+                    // Set the current directory to the specified path
+                    File defaultDirectory = new File(path);
+                    fileChooser.setCurrentDirectory(defaultDirectory);
+
+                    // Add a file filter to show only PDF files
+                    fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("PDF Files", "pdf"));
+
+                    // Show the dialog and allow user to select files or directories
                     int option = fileChooser.showOpenDialog(parentFrame);
                     if (option == JFileChooser.APPROVE_OPTION) {
                         File file = fileChooser.getSelectedFile();
                         pathField.setText(file.getAbsolutePath());
                     } else {
+                        // Reset the icon if no file is selected
                         folderIcon.setIcon(new ImageIcon(scaledImage));
                     }
                 }
@@ -256,6 +267,7 @@ public class FolderPathPage {
 
         return folderPanel;
     }
+
 
 
 

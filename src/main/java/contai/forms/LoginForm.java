@@ -2,8 +2,10 @@ package contai.forms;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.List;
 import java.util.Timer;
 import org.apache.log4j.Logger;
 
@@ -26,6 +28,7 @@ public class LoginForm {
     private JsonObject userData;
     private String authToken;
     private JsonArray CuiData = new JsonArray();
+    private  String storedId = null;
   
     public LoginForm(JFrame parentFrame) {
         this.parentFrame = parentFrame;
@@ -337,56 +340,58 @@ public class LoginForm {
         }
 
         private void setupPlanTrigger(JsonObject plan) {
-            JsonObject frequency = plan.getAsJsonObject("frequency");
-            String type = frequency.has("type") && !frequency.get("type").isJsonNull() ? frequency.get("type").getAsString() : "unknown";
-            Integer value = null;
+     	   String type = plan.has("frequency_type") && !plan.get("frequency_type").isJsonNull() 
+     	            ? plan.get("frequency_type").getAsString() 
+     	            : "unknown";
 
-            // Handle the frequency value safely
-            if (frequency.has("value") && !frequency.get("value").isJsonNull()) {
-                try {
-                    value = frequency.get("value").getAsInt();
-                } catch (UnsupportedOperationException e) {
-                	logger.info("Frequency value is not an integer for plan: " + plan.get("name").getAsString());
-                }
-            }
+     	   Integer value = null;
 
-            // Log frequency type and value for debugging
-            logger.info("Triggering plan: " + plan.get("name").getAsString() + " at " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
-            logger.info("Frequency Type: " + type);
-            if (value != null) {
-            	logger.info("Frequency Value: " + value);
-            } else {
-            	logger.info("Frequency Value is not available for plan: " + plan.get("name").getAsString());
-            }
+     	    // Handle the frequency value safely
+     	    if (plan.has("frequency_value") && !plan.get("frequency_value").isJsonNull()) {
+     	        try {
+     	            value = plan.get("frequency_value").getAsInt();
+     	        } catch (UnsupportedOperationException e) {
+     	            logger.info("Frequency value is not an integer for plan: " + plan.get("name").getAsString());
+     	        }
+     	    }
 
-            // Handle different frequency types
-            switch (type) {
-                case "minutes":
-                    if (value != null) {
-                        long interval = value * 60 * 1000; // Convert minutes to milliseconds
-                        timer.scheduleAtFixedRate(new TimerTask() {
-                            @Override
-                            public void run() {
-                                triggerPlan(plan);
-                            }
-                        }, 0, interval);
-                    } else {
-                    	logger.info("Cannot schedule plan with null frequency value.");
-                    }
-                    break;
-                case "always_on":
-                    triggerPlan(plan);
-                    timer.scheduleAtFixedRate(new TimerTask() {
-                        @Override
-                        public void run() {
-                            triggerPlan(plan);
-                        }
-                    }, 0, 5 * 60 * 1000); // Every 5 minutes
-                    break;
-                default:
-                	logger.info("Unknown frequency type: " + type);
-            }
-        }
+         // Log frequency type and value for debugging
+         logger.info("Triggering plan: " + plan.get("name").getAsString() + " at " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+         logger.info("Frequency Type: " + type);
+         if (value != null) {
+         	logger.info("Frequency Value: " + value);
+         } else {
+         	logger.info("Frequency Value is not available for plan: " + plan.get("name").getAsString());
+         }
+
+         // Handle different frequency types
+         switch (type) {
+             case "minutes":
+                 if (value != null) {
+                     long interval = value * 60 * 1000; // Convert minutes to milliseconds
+                     timer.scheduleAtFixedRate(new TimerTask() {
+                         @Override
+                         public void run() {
+                             triggerPlan(plan);
+                         }
+                     }, 0, interval);
+                 } else {
+                 	logger.info("Cannot schedule plan with null frequency value.");
+                 }
+                 break;
+             case "always_on":
+                 triggerPlan(plan);
+                 timer.scheduleAtFixedRate(new TimerTask() {
+                     @Override
+                     public void run() {
+                         triggerPlan(plan);
+                     }
+                 }, 0, 5 * 60 * 1000); // Every 5 minutes
+                 break;
+             default:
+             	logger.info("Unknown frequency type: " + type);
+         }
+     }
 
 
         private void triggerPlan(JsonObject plan) {
@@ -395,36 +400,31 @@ public class LoginForm {
             String currentTime = sdf.format(new Date());
             logger.info("Triggering plan: " + planName + " at " + currentTime);
 
-            // Extract the frequency object from the plan
-            JsonObject frequencyObj = plan.getAsJsonObject("frequency");
+            // Directly access frequency_type and frequency_value
+            String frequencyType = plan.has("frequency_type") && !plan.get("frequency_type").isJsonNull() 
+                    ? plan.get("frequency_type").getAsString() 
+                    : "N/A"; // Default value if 'type' is null
 
-            if (frequencyObj != null && !frequencyObj.isJsonNull()) {
-                String frequencyType = frequencyObj.has("type") && !frequencyObj.get("type").isJsonNull() 
-                        ? frequencyObj.get("type").getAsString() 
-                        : "N/A"; // Default value if 'type' is null
-
-                // Initialize frequencyValue as null and handle cases where "value" may be missing or null
-                Integer frequencyValue = null;
-                if (frequencyObj.has("value") && !frequencyObj.get("value").isJsonNull()) {
-                    try {
-                        frequencyValue = frequencyObj.get("value").getAsInt();
-                    } catch (UnsupportedOperationException e) {
-                    	logger.warn("Frequency value is not an integer for plan: " + planName);
-                    }
+            // Initialize frequencyValue as null and handle cases where "value" may be missing or null
+            Integer frequencyValue = null;
+            if (plan.has("frequency_value") && !plan.get("frequency_value").isJsonNull()) {
+                try {
+                    frequencyValue = plan.get("frequency_value").getAsInt();
+                } catch (UnsupportedOperationException e) {
+                    logger.warn("Frequency value is not an integer for plan: " + planName);
                 }
-
-                logger.info("Frequency Type: " + frequencyType);
-                if (frequencyValue != null) {
-                	logger.info("Frequency Value: " + frequencyValue);
-                } else {
-                	logger.info("Frequency Value is not available for plan: " + planName);
-                }
-
-                executePlanActions(planName, frequencyType, frequencyValue);
-            } else {
-            	logger.info("No valid frequency data for plan: " + planName);
             }
+
+            logger.info("Frequency Type: " + frequencyType);
+            if (frequencyValue != null) {
+                logger.info("Frequency Value: " + frequencyValue);
+            } else {
+                logger.info("Frequency Value is not available for plan: " + planName);
+            }
+
+            executePlanActions(planName, frequencyType, frequencyValue);
         }
+
 
 
 
@@ -435,6 +435,7 @@ public class LoginForm {
                 	processPlanA();
                     break;
                 case "Plan B":
+                	processPlanB();
                     // Trigger specific actions for Plan B
 //                	logger.info("Executing actions for Plan B with frequency type: " + frequencyType + " and value: " + frequencyValue);
                     break;
@@ -538,7 +539,121 @@ public class LoginForm {
                 
             }
         }
-      
+        private void processPlanB() {
+        	 JsonArray mesajeArr = null;
+        	 try {    	      
+        	        String url = storedId == null ? 
+        	            "https://webserviced.anaf.ro/SPVWS2/rest/listaMesaje?zile=1" :
+        	            "https://webserviced.anaf.ro/SPVWS2/rest/listaMesaje?zile=50";
+        	        logger.info("url------->" + url);
+        	        JsonObject response = RestPlanService.executePlan(url);        	     
+        	        mesajeArr = response.getAsJsonArray("mesaje");
+        	        logger.info("mesajeArr------->" + mesajeArr);
+        	        if (mesajeArr != null && mesajeArr.size() > 0) {
+        	          
+        	         
+        	            if (storedId != null) {
+        	            	 logger.info("second time call filterMessagesAfterStoredId");
+        	                mesajeArr = filterMessagesAfterStoredId(mesajeArr, storedId);
+        	            }
+                        
+        	            if (mesajeArr == null || mesajeArr.size() == 0) {
+        	                logger.info("No messages found after filtering. Aborting further processing.");
+        	                return; // Exit the method if no messages are left after filtering
+        	            }
+        	           
+        	            logger.info("after filter mesajeArr response-------" + mesajeArr);
+
+        	            // Split messages into smaller packages if necessary
+        	            List<JsonArray> messagePackages = splitIntoPackages(mesajeArr,200); // Adjust package size as needed
+
+        	            // Send each package to the cloud
+        	            for (JsonArray packageArr : messagePackages) {
+        	            	 logger.info("RestCloudActionService req array-------" + packageArr);
+        	                JsonObject apiResponse = RestCloudActionService.sendMesajeData(packageArr, authToken);
+        	                logger.info("RestCloudActionService response-------" + apiResponse);
+        	            }
+
+        	            // Extract and process IDs
+        	            Set<String> extractedIds = extractIds(mesajeArr);
+        	            String highestId = processExtractedIds(extractedIds);
+        	            logger.info("highestId------------------" + highestId);
+        	            storedId = highestId ;
+
+        	        } else {
+        	            logger.warn("Invalid response format");
+        	        }
+        	    } catch (Exception e) {
+        	        JOptionPane.showMessageDialog(panel, e.getMessage(), "Response", JOptionPane.ERROR_MESSAGE);
+        	        e.printStackTrace();
+        	        logger.warn("Error--" + e);
+        	    }
+
+          
+        }
+        
+        private JsonArray filterMessagesAfterStoredId(JsonArray mesajeArr, String storedId) {
+            JsonArray filteredArr = new JsonArray();
+            for (JsonElement element : mesajeArr) {
+                JsonObject message = element.getAsJsonObject();
+                String messageId = message.get("id").getAsString();
+
+                if (Long.parseLong(messageId) > Long.parseLong(storedId)) {
+                    filteredArr.add(message);
+                }
+            }
+            return filteredArr;
+        }
+
+
+        private List<JsonArray> splitIntoPackages(JsonArray mesajeArr, int packageSize) {
+            List<JsonArray> packages = new ArrayList<>();
+            JsonArray currentPackage = new JsonArray();
+            for (JsonElement element : mesajeArr) {
+                currentPackage.add(element);
+                if (currentPackage.size() == packageSize) {
+                    packages.add(currentPackage);
+                    currentPackage = new JsonArray();
+                }
+            }
+            if (currentPackage.size() > 0) {
+                packages.add(currentPackage);
+            }
+            return packages;
+        }
+
+        private Set<String> extractIds(JsonArray mesajeArr) {
+            Set<String> ids = new HashSet<>();
+            for (JsonElement element : mesajeArr) {
+                JsonObject message = element.getAsJsonObject();
+                ids.add(message.get("id").getAsString());
+            }
+            return ids;
+        }
+
+        private String processExtractedIds(Set<String> extractedIds) {
+            String highestId = "";
+            try {
+                long maxId = -1; 
+
+                for (String id : extractedIds) {
+                    File file = RestPlanService.getFile("https://webserviced.anaf.ro/SPVWS2/rest/descarcare?id="+id,"C:\\Documents\\contai\\documente SPV");  
+                   
+                    long numericId = Long.parseLong(id.trim());
+
+                    if (numericId > maxId) {
+                        maxId = numericId;
+                        highestId = id; 
+                    }
+                }
+
+            } catch (NumberFormatException e) {
+                logger.warn("ID format issue: " + e.getMessage());
+            }
+
+            return highestId; // Return the highest ID as a string
+        }
+
         private void processPlanC() {
             try {
                 Set<String> currentCuiSet = new HashSet<>();
