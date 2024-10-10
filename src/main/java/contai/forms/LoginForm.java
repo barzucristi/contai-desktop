@@ -7,11 +7,14 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.List;
 import java.util.Timer;
+import java.util.prefs.Preferences;
+
 import org.apache.log4j.Logger;
 
 
 import com.google.gson.*;
 
+import contai.ContAiApp;
 import contai.service.RestCloudActionService;
 import contai.service.RestLoginService;
 import contai.service.RestPlanService;
@@ -264,7 +267,7 @@ public class LoginForm {
                 int status = response.get("status").getAsInt();
 
                 if (status == 200) {
-                    JOptionPane.showMessageDialog(panel, "Login successful!");
+                
                     JsonObject Data = response.getAsJsonObject("data");
                     
                     
@@ -273,6 +276,10 @@ public class LoginForm {
                     	  if (Data.has("token")) {
                               authToken = Data.get("token").getAsString(); // Extract the token
                               logger.info("authToken: " + authToken); // Log the token
+
+                              Preferences prefs = Preferences.userRoot().node(ContAiApp.class.getName()); // Ensure node consistency
+                              prefs.put("authToken", authToken); // Store the token
+                              
                           } else {
                               logger.warn("Token not found in response data.");
                           }
@@ -546,8 +553,12 @@ public class LoginForm {
         	            "https://webserviced.anaf.ro/SPVWS2/rest/listaMesaje?zile=1" :
         	            "https://webserviced.anaf.ro/SPVWS2/rest/listaMesaje?zile=50";
         	        logger.info("url------->" + url);
-        	        JsonObject response = RestPlanService.executePlan(url);        	     
-        	        mesajeArr = response.getAsJsonArray("mesaje");
+        	        JsonObject response = RestPlanService.executePlan(url);     
+        	        if(response!=null)
+        	        {
+        	          mesajeArr = response.getAsJsonArray("mesaje");
+        	        }
+        	        
         	        logger.info("mesajeArr------->" + mesajeArr);
         	        if (mesajeArr != null && mesajeArr.size() > 0) {
         	          
@@ -584,7 +595,6 @@ public class LoginForm {
         	            logger.warn("Invalid response format");
         	        }
         	    } catch (Exception e) {
-        	        JOptionPane.showMessageDialog(panel, e.getMessage(), "Response", JOptionPane.ERROR_MESSAGE);
         	        e.printStackTrace();
         	        logger.warn("Error--" + e);
         	    }
@@ -637,7 +647,7 @@ public class LoginForm {
                 long maxId = -1; 
 
                 for (String id : extractedIds) {
-                    File file = RestPlanService.getFile("https://webserviced.anaf.ro/SPVWS2/rest/descarcare?id="+id,"C:\\Documents\\contai\\documente SPV");  
+                    File file = RestPlanService.getFile("https://webserviced.anaf.ro/SPVWS2/rest/descarcare?id="+id,"C:\\Documents\\contai\\documente SPV1");  
                    
                     long numericId = Long.parseLong(id.trim());
 
