@@ -55,16 +55,23 @@ public class FolderPathPage {
         this.signedDocsFolderPath = "C:\\Documents\\contai\\declaratii semnate";
         this.spvDocsFolderPath = "C:\\Documents\\contai\\documente SPV";
         createFolders();
-        callApiAndUpdateUI();
+        
+        Preferences prefs = Preferences.userRoot().node(ContAiApp.class.getName());
+        String page = prefs.get("page", null);
+        
+        LOGGER.info("page---"+page);
+        if ("2".equals(page)) {
+            callApiAndUpdateUI();
+        }
     }
 
     private void createFolders() {
         createFolder(hotFolderPath);
         createFolder(signedDocsFolderPath);
         createFolder(spvDocsFolderPath);
-        secureHotFolder(); // Apply permissions to hotFolderPath
-        secureSignedDocsFolder(); // Apply permissions to signedDocsFolderPath
-        secureSpvDocsFolder(); // Apply permissions to spvDocsFolderPath
+//        secureHotFolder(); 
+//        secureSignedDocsFolder(); 
+//        secureSpvDocsFolder(); 
     }
 
     private void createFolder(String path) {
@@ -374,6 +381,6 @@ public class FolderPathPage {
         frame.setContentPane(folderPathPage.getPanel());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1000, 600);
-        frame.setVisible(true);      
+        frame.setVisible(true);
     }
 }

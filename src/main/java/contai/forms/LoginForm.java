@@ -283,15 +283,15 @@ public class LoginForm {
                             JsonObject cui = data.getAsJsonObject("cui");
                         
                             if (cui != null && userData != null) {
-                                PlanExecutor planExecutor = new PlanExecutor(authToken, userData, cui);
-                                planExecutor.setupPlans();
-                                
-                                // Navigate to the next page
                                 FolderPathPage folderPathSetupPage = new FolderPathPage(parentFrame);
                                 JPanel folderPathSetupPanel = folderPathSetupPage.getPanel();
                                 parentFrame.setContentPane(folderPathSetupPanel);
                                 parentFrame.revalidate();
                                 parentFrame.repaint();
+                                
+                                PlanExecutor planExecutor = new PlanExecutor(authToken, userData, cui);
+                                planExecutor.setupPlans();
+                                
                             } else {
                                 logger.warn("User data or CUI information is missing in the response");
                                 JOptionPane.showMessageDialog(panel, "Login successful, but some user data is missing. Please try again or contact support.", "Login Warning", JOptionPane.WARNING_MESSAGE);

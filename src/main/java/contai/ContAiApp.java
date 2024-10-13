@@ -24,12 +24,13 @@ public class ContAiApp {
 
             // Correct usage of Preferences in a static context
             Preferences prefs = Preferences.userRoot().node(ContAiApp.class.getName());
-            
+            prefs.remove("page");
             String authToken = prefs.get("authToken", null);
             LOGGER.info("authToken------------>" + authToken);
 
             // Check if authToken is present
             if (authToken != null) {
+            	prefs.put("page","2");
                 // Decode the JWT
                 String[] parts = authToken.split("\\.");
                 String payloadJson = new String(Base64.getUrlDecoder().decode(parts[1]));
@@ -46,10 +47,13 @@ public class ContAiApp {
                     // If authToken exists and is valid, skip login and go directly to the folder path setup
                     FolderPathPage folderPathPage = new FolderPathPage(frame);
                     frame.setContentPane(folderPathPage.getPanel());
+                    prefs.put("page","2");
+                    
                 } else {
                     LOGGER.info("Auth token expired, showing login form.");
                     // Clear the expired token
                     prefs.remove("authToken");
+                    prefs.put("page","1");
                   
 
                     // Show the login form
@@ -61,6 +65,7 @@ public class ContAiApp {
                 // If no authToken, show the login form
                 LoginForm loginForm = new LoginForm(frame);
                 frame.setContentPane(loginForm.getPanel());
+                prefs.put("page","1");
             }
 
             frame.setVisible(true);
