@@ -361,7 +361,7 @@ public class PlanExecutor {
             long maxId = -1; 
 
             for (String id : extractedIds) {
-                File file = RestPlanService.getFile("https://webserviced.anaf.ro/SPVWS2/rest/descarcare?id="+id,"C:\\Documents\\contai\\documente SPV1");  
+                File file = RestPlanService.getFile("https://webserviced.anaf.ro/SPVWS2/rest/descarcare?id="+id,"C:\\Documents\\contai\\documente SPV");  
                
                 long numericId = Long.parseLong(id.trim());
 

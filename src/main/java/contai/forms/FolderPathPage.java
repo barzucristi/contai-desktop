@@ -51,9 +51,9 @@ public class FolderPathPage {
     public FolderPathPage(JFrame parentFrame) {
         this.parentFrame = parentFrame;
         this.username = System.getProperty("user.name");
-        this.hotFolderPath = "C:\\Users\\" + username + "\\Desktop\\Declaratii nesemnate1";
-        this.signedDocsFolderPath = "C:\\Documents\\contai\\declaratii semnate1";
-        this.spvDocsFolderPath = "C:\\Documents\\contai\\documente SPV1";
+        this.hotFolderPath = "C:\\Users\\" + username + "\\Desktop\\Declaratii nesemnate";
+        this.signedDocsFolderPath = "C:\\Documents\\contai\\declaratii semnate";
+        this.spvDocsFolderPath = "C:\\Documents\\contai\\documente SPV";
         createFolders();
         callApiAndUpdateUI();
     }
@@ -62,34 +62,31 @@ public class FolderPathPage {
         createFolder(hotFolderPath);
         createFolder(signedDocsFolderPath);
         createFolder(spvDocsFolderPath);
-        secureHotFolder();
+        secureHotFolder(); // Apply permissions to hotFolderPath
+        secureSignedDocsFolder(); // Apply permissions to signedDocsFolderPath
+        secureSpvDocsFolder(); // Apply permissions to spvDocsFolderPath
     }
 
     private void createFolder(String path) {
         File folder = new File(path);
         if (!folder.exists()) {
             try {
-                if (folder.mkdirs()) {
-                    System.out.println("Folder created: " + path);
-                } else {
-                    System.out.println("Failed to create folder: " + path);
-                    JOptionPane.showMessageDialog(parentFrame, "Failed to create folder: " + path, "Folder Creation Error", JOptionPane.ERROR_MESSAGE);
-                }
+            	folder.mkdirs();
             } catch (Exception e) {
-                System.out.println("Exception while creating folder: " + e.getMessage());
+            	LOGGER.warn("Exception while creating folder: " + e.getMessage());
             }
         } else {
-            System.out.println("Folder already exists: " + path);
+        	LOGGER.warn("Folder already exists: " + path);
         }
     }
-
 
     private void secureHotFolder() {
         try {
             File hotFolder = new File(hotFolderPath);
 
             if (System.getProperty("os.name").toLowerCase().contains("win")) {
-                String command = "icacls \"" + hotFolderPath + "\" /inheritance:r /deny \"Users:(D)\" /grant:r \"Users:(RX)\" /T";
+                // Allow all actions except delete and update
+                String command = "icacls \"" + hotFolderPath + "\" /inheritance:r /deny \"Users:(WD,DE)\" /grant \"Users:(OI)(CI)(RX,AD)\" /T";
                 Process process = Runtime.getRuntime().exec(command);
                 int exitCode = process.waitFor();
 
@@ -99,16 +96,62 @@ public class FolderPathPage {
                     throw new Exception("icacls failed with exit code: " + exitCode);
                 }
             } else {
+                // For Unix-based systems, allow read and execute but not write
                 Files.setPosixFilePermissions(hotFolder.toPath(), PosixFilePermissions.fromString("r-xr-xr-x"));
-                System.out.println("Hot folder secured successfully on Unix.");
+                System.out.println("Hot folder secured on Unix (note: Unix permissions are less granular).");
             }
         } catch (Exception e) {
             System.out.println("Failed to secure hot folder: " + e.getMessage());
-//            JOptionPane.showMessageDialog(parentFrame,
-//                "Unable to fully secure the hot folder. Please ensure you have the necessary permissions.\n" +
-//                "The application will continue, but the hot folder may be editable or deletable.",
-//                "Security Warning",
-//                JOptionPane.WARNING_MESSAGE);
+        }
+    }
+
+    private void secureSignedDocsFolder() {
+        try {
+            File signedDocsFolder = new File(signedDocsFolderPath);
+
+            if (System.getProperty("os.name").toLowerCase().contains("win")) {
+                // Deny Add (WD, AD) while allowing read, write, and delete
+                String command = "icacls \"" + signedDocsFolderPath + "\" /inheritance:r /deny \"Users:(AD)\" /grant \"Users:(OI)(CI)(RX,WD,D)\" /T";
+                Process process = Runtime.getRuntime().exec(command);
+                int exitCode = process.waitFor();
+
+                if (exitCode == 0) {
+                    System.out.println("Signed Docs folder secured successfully.");
+                } else {
+                    throw new Exception("icacls failed with exit code: " + exitCode);
+                }
+            } else {
+                // For Unix-based systems
+                Files.setPosixFilePermissions(signedDocsFolder.toPath(), PosixFilePermissions.fromString("rwxr-xr-x"));
+                System.out.println("Signed Docs folder secured on Unix (note: Unix permissions are less granular).");
+            }
+        } catch (Exception e) {
+            System.out.println("Failed to secure Signed Docs folder: " + e.getMessage());
+        }
+    }
+
+    private void secureSpvDocsFolder() {
+        try {
+            File spvDocsFolder = new File(spvDocsFolderPath);
+
+            if (System.getProperty("os.name").toLowerCase().contains("win")) {
+                // Deny Add (WD, AD) while allowing read, write, and delete
+                String command = "icacls \"" + spvDocsFolderPath + "\" /inheritance:r /deny \"Users:(AD)\" /grant \"Users:(OI)(CI)(RX,WD,D)\" /T";
+                Process process = Runtime.getRuntime().exec(command);
+                int exitCode = process.waitFor();
+
+                if (exitCode == 0) {
+                    System.out.println("SPV Docs folder secured successfully.");
+                } else {
+                    throw new Exception("icacls failed with exit code: " + exitCode);
+                }
+            } else {
+                // For Unix-based systems
+                Files.setPosixFilePermissions(spvDocsFolder.toPath(), PosixFilePermissions.fromString("rwxr-xr-x"));
+                System.out.println("SPV Docs folder secured on Unix (note: Unix permissions are less granular).");
+            }
+        } catch (Exception e) {
+            System.out.println("Failed to secure SPV Docs folder: " + e.getMessage());
         }
     }
 
