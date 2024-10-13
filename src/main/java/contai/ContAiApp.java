@@ -24,6 +24,7 @@ public class ContAiApp {
 
             // Correct usage of Preferences in a static context
             Preferences prefs = Preferences.userRoot().node(ContAiApp.class.getName());
+            
             String authToken = prefs.get("authToken", null);
             LOGGER.info("authToken------------>" + authToken);
 
@@ -49,7 +50,7 @@ public class ContAiApp {
                     LOGGER.info("Auth token expired, showing login form.");
                     // Clear the expired token
                     prefs.remove("authToken");
-                    prefs.remove("tokenExpirationTime");
+                  
 
                     // Show the login form
                     LoginForm loginForm = new LoginForm(frame);

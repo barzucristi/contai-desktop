@@ -18,7 +18,7 @@ import org.apache.log4j.Logger;
 public class RestLoginService {
 
     private static final String LOGIN_URL = "https://spv-dev.contai.ro/api/auth/login";
-
+    private static final String DESKTOP_URL = "https://spv-dev.contai.ro/api/desktop/me";
     private static final Logger LOGGER = Logger.getLogger(RestLoginService.class);
     
     public static JsonObject login(String email, String password) throws IOException {
@@ -39,6 +39,45 @@ public class RestLoginService {
                 os.flush();
             }
 
+            // Read response
+            InputStream stream = connection.getResponseCode() == HttpURLConnection.HTTP_OK
+                    ? connection.getInputStream()
+                    : connection.getErrorStream();
+
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8))) {
+                StringBuilder response = new StringBuilder();
+                String responseLine;
+                while ((responseLine = br.readLine()) != null) {
+                    response.append(responseLine.trim());
+                }
+                try {
+                	LOGGER.info("Response login--"+response.toString());
+                	return new JsonParser().parse(response.toString()).getAsJsonObject();
+                } catch (JsonSyntaxException e) {
+                	LOGGER.info("Response login--"+e);
+                    throw new IOException("Failed to parse JSON response", e);
+                }
+            }
+        } finally {
+            if (connection != null) {
+                connection.disconnect();
+            }
+        }
+    }
+    
+    
+    public static JsonObject desktop(String authToken) throws IOException {
+        HttpURLConnection connection = null;
+        try {
+            URL url = new URL(DESKTOP_URL);
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setRequestProperty("Content-Type", "application/json");
+            connection.setRequestProperty("Accept", "application/json");
+            connection.setRequestProperty("Cookie", "token="+authToken);
+            connection.setDoOutput(true);
+
+         
             // Read response
             InputStream stream = connection.getResponseCode() == HttpURLConnection.HTTP_OK
                     ? connection.getInputStream()

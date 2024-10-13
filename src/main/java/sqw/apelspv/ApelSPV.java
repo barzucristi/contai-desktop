@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.StringReader;
 import java.net.CookieHandler;
 import java.net.CookieManager;
 import java.net.InetSocketAddress;
@@ -26,6 +27,7 @@ import javax.net.ssl.X509TrustManager;
 import org.apache.log4j.Logger;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.stream.JsonReader;
 
 import sun.security.pkcs11.SunPKCS11;
 
@@ -130,6 +132,8 @@ public class ApelSPV {
             String contentType = con.getContentType();
 
             if (responseCode == HttpsURLConnection.HTTP_OK) {
+            	
+            	
                 // Read and log response
                 try (BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()))) {
                     String inputLine;
@@ -137,15 +141,19 @@ public class ApelSPV {
                         responseBuilder.append(inputLine);
                     }
                 }
+                
+                LOGGER.error("responseBuilder:== " + responseBuilder.toString());
 
                 // Only parse if content type is JSON
                 if (contentType != null) {
                     if (contentType.contains("application/json")) {
-                        // Parse JSON response
-                        jsonResponse =new JsonParser().parse(responseBuilder.toString()).getAsJsonObject();
+                    	JsonReader reader = new JsonReader(new StringReader(responseBuilder.toString()));
+                    	reader.setLenient(true); 
+                    	jsonResponse =new JsonParser().parse(reader).getAsJsonObject();
                     } else if (contentType.contains("text/html")) {
-         
-                        jsonResponse =new JsonParser().parse(responseBuilder.toString()).getAsJsonObject();
+                        JsonReader reader = new JsonReader(new StringReader(responseBuilder.toString()));
+                  	    reader.setLenient(true); 
+                  	    jsonResponse =new JsonParser().parse(reader).getAsJsonObject();
                     } else {
                         // Handle unexpected content types
                         LOGGER.warn("Unexpected content type: " + contentType);
