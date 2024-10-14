@@ -14,7 +14,6 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.attribute.PosixFilePermissions;
-import java.util.prefs.Preferences;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -22,49 +21,38 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
 import org.apache.log4j.Logger;
 
-import com.google.gson.JsonObject;
-
-import contai.ContAiApp;
-import contai.service.RestLoginService;
-import contai.utilities.PlanExecutor;
+import contai.SessionManager;
 
 public class FolderPathPage {
 
     private static final Logger LOGGER = Logger.getLogger(FolderPathPage.class);
     private JPanel panel;
     private JFrame parentFrame;
+    private SessionManager sessionManager;
     private String username;
     private String hotFolderPath;
     private String signedDocsFolderPath;
     private String spvDocsFolderPath;
-   
- 
-    public FolderPathPage(JFrame parentFrame) {
+
+    public FolderPathPage(JFrame parentFrame, SessionManager sessionManager) {
         this.parentFrame = parentFrame;
+        this.sessionManager = sessionManager;
         this.username = System.getProperty("user.name");
         this.hotFolderPath = "C:\\Users\\" + username + "\\Desktop\\Declaratii nesemnate";
         this.signedDocsFolderPath = "C:\\Documents\\contai\\declaratii semnate";
         this.spvDocsFolderPath = "C:\\Documents\\contai\\documente SPV";
         createFolders();
-        
-        Preferences prefs = Preferences.userRoot().node(ContAiApp.class.getName());
-        String page = prefs.get("page", null);
-        
-        LOGGER.info("page---"+page);
-        if ("2".equals(page)) {
-            callApiAndUpdateUI();
-        }
     }
-
+    
     private void createFolders() {
         createFolder(hotFolderPath);
         createFolder(signedDocsFolderPath);
@@ -167,6 +155,27 @@ public class FolderPathPage {
     public JPanel getPanel() {
         panel = new JPanel(new GridBagLayout());
         panel.setBackground(Color.WHITE);
+        
+        
+        // Creating the shutdown image icon
+        JLabel shutdownLabel = new JLabel();
+        ImageIcon shutdownIcon = new ImageIcon(getClass().getResource("/images/shutdown.png"));
+        shutdownLabel.setIcon(new ImageIcon(shutdownIcon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
+        shutdownLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        // Add mouse listener to the shutdown icon to trigger logout on click
+        shutdownLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent e) {
+                sessionManager.logout(); // Perform logout when the image is clicked
+            }
+        });
+
+        // Setting up constraints for the shutdown icon
+        GridBagConstraints shutdownGbc = new GridBagConstraints();
+        shutdownGbc.insets = new Insets(25, 25, 25, 25);
+        shutdownGbc.gridx = 1; // Position it on the right
+        shutdownGbc.gridy = 0; // Same row as the logo
+        panel.add(shutdownLabel, shutdownGbc);
 
         JLabel logo = new JLabel();
         ImageIcon logoIcon = new ImageIcon(getClass().getResource("/images/ai.png"));
@@ -329,58 +338,16 @@ public class FolderPathPage {
         return folderPanel;
     }
 
-
-    private void callApiAndUpdateUI() {
-    	 try {
-    		 Preferences prefs = Preferences.userRoot().node(ContAiApp.class.getName());     
-             String authToken = prefs.get("authToken", null);
-             JsonObject response = RestLoginService.desktop(authToken);
-
-             if (response != null && response.has("status")) {
-                 int status = response.get("status").getAsInt();
-
-                 if (status == 200) {
-                     JsonObject data = response.getAsJsonObject("data");
-                     
-                     if (data != null) {
-                        
-                             JsonObject userData = data.getAsJsonObject("user");
-                             JsonObject cui = data.getAsJsonObject("cui");
-                         
-                             if (cui != null && userData != null) {
-                                 PlanExecutor planExecutor = new PlanExecutor(authToken, userData, cui);
-                                 planExecutor.setupPlans();
-                             } else {
-                            	 LOGGER.warn("User data or CUI information is missing in the response");
-                    
-                             }
-                      
-                     } else {
-                    	 LOGGER.warn("User data not found in response");
-  
-                     }
-                 } else {
-                     String message = response.has("message") ? response.get("message").getAsString() : "An unknown error occurred during login. Please try again.";
-                     LOGGER.warn("Login failed with status: " + status + ". Message: " + message);
-             
-                 }
-             } else {
-            	 LOGGER.warn("Invalid response format from server");
-          
-             }
-         } catch (Exception e) {
-        	 LOGGER.error("Exception occurred during login", e);
-            
-         }
-    		
-    };
-
     public static void main(String[] args) {
-        JFrame frame = new JFrame("FolderPathPage");
-        FolderPathPage folderPathPage = new FolderPathPage(frame);
-        frame.setContentPane(folderPathPage.getPanel());
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1000, 600);
-        frame.setVisible(true);
+        SwingUtilities.invokeLater(() -> {
+            JFrame frame = new JFrame("FolderPathPage");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setSize(1000, 600);
+            
+            SessionManager sessionManager = new SessionManager(frame);
+            sessionManager.showFolderPathPage(frame);
+            
+            frame.setVisible(true);
+        });
     }
 }

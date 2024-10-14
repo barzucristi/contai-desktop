@@ -1,24 +1,38 @@
 package contai.forms;
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
-import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.List;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GradientPaint;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Image;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Timer;
-import java.util.prefs.Preferences;
+
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JSplitPane;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 import org.apache.log4j.Logger;
 
-
-import com.google.gson.*;
-
-import contai.ContAiApp;
-import contai.service.RestCloudActionService;
-import contai.service.RestLoginService;
-import contai.service.RestPlanService;
-import contai.utilities.PlanExecutor;
+import contai.SessionManager;
 
 public class LoginForm {
 	private static final Logger logger = Logger.getLogger(LoginForm.class);
@@ -29,12 +43,10 @@ public class LoginForm {
     private JFrame parentFrame;
     private JCheckBox rememberMeCheckbox;
     private Timer timer;
-    private JsonObject userData;
-    private String authToken;
-    private JsonArray CuiData = new JsonArray();
-    private  String storedId = null;
+    private SessionManager sessionManager;
   
-    public LoginForm(JFrame parentFrame) {
+    public LoginForm(JFrame parentFrame,SessionManager sessionManager) {
+    	this.sessionManager=sessionManager;
         this.parentFrame = parentFrame;
         this.timer = new Timer();
     }
@@ -263,56 +275,7 @@ public class LoginForm {
         }
 
         try {
-            JsonObject response = RestLoginService.login(username, password);
-
-            if (response != null && response.has("status")) {
-                int status = response.get("status").getAsInt();
-
-                if (status == 200) {
-                    JsonObject data = response.getAsJsonObject("data");
-                    
-                    if (data != null) {
-                        if (data.has("token")) {
-                            String authToken = data.get("token").getAsString();
-                            logger.info("Login successful. Auth token received.");
-
-                            Preferences prefs = Preferences.userRoot().node(ContAiApp.class.getName());
-                            prefs.put("authToken", authToken);
-                            
-                            JsonObject userData = data.getAsJsonObject("user");
-                            JsonObject cui = data.getAsJsonObject("cui");
-                        
-                            if (cui != null && userData != null) {
-                                FolderPathPage folderPathSetupPage = new FolderPathPage(parentFrame);
-                                JPanel folderPathSetupPanel = folderPathSetupPage.getPanel();
-                                parentFrame.setContentPane(folderPathSetupPanel);
-                                parentFrame.revalidate();
-                                parentFrame.repaint();
-                                
-                                PlanExecutor planExecutor = new PlanExecutor(authToken, userData, cui);
-                                planExecutor.setupPlans();
-                                
-                            } else {
-                                logger.warn("User data or CUI information is missing in the response");
-                                JOptionPane.showMessageDialog(panel, "Login successful, but some user data is missing. Please try again or contact support.", "Login Warning", JOptionPane.WARNING_MESSAGE);
-                            }
-                        } else {
-                            logger.warn("Auth token not found in response data");
-                            JOptionPane.showMessageDialog(panel, "Login successful, but authentication token is missing. Please try again or contact support.", "Login Warning", JOptionPane.WARNING_MESSAGE);
-                        }
-                    } else {
-                        logger.warn("User data not found in response");
-                        JOptionPane.showMessageDialog(panel, "Login successful, but user data is missing. Please try again or contact support.", "Login Warning", JOptionPane.WARNING_MESSAGE);
-                    }
-                } else {
-                    String message = response.has("message") ? response.get("message").getAsString() : "An unknown error occurred during login. Please try again.";
-                    logger.warn("Login failed with status: " + status + ". Message: " + message);
-                    JOptionPane.showMessageDialog(panel, message, "Login Error", JOptionPane.ERROR_MESSAGE);
-                }
-            } else {
-                logger.warn("Invalid response format from server");
-                JOptionPane.showMessageDialog(panel, "The server response was invalid. Please try again later or contact support.", "Login Error", JOptionPane.ERROR_MESSAGE);
-            }
+			sessionManager.login(username, password);     
         } catch (Exception e) {
             logger.error("Exception occurred during login", e);
             JOptionPane.showMessageDialog(panel, "An unexpected error occurred during login. Please check your internet connection and try again.", "Login Error", JOptionPane.ERROR_MESSAGE);
