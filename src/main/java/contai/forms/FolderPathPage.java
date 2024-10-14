@@ -14,6 +14,7 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.attribute.PosixFilePermissions;
+import java.util.prefs.Preferences;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -30,6 +31,7 @@ import javax.swing.border.EmptyBorder;
 
 import org.apache.log4j.Logger;
 
+import contai.ContAiApp;
 import contai.SessionManager;
 
 public class FolderPathPage {
@@ -42,14 +44,19 @@ public class FolderPathPage {
     private String hotFolderPath;
     private String signedDocsFolderPath;
     private String spvDocsFolderPath;
+    private static final String HOT_FOLDER_PATH_KEY = "hotFolderPath";
+    private static final String SIGNED_DOCS_FOLDER_PATH_KEY = "signedDocsFolderPath";
+    private static final String SPV_DOCS_FOLDER_PATH_KEY = "spvDocsFolderPath";
+    private Preferences prefs;
 
     public FolderPathPage(JFrame parentFrame, SessionManager sessionManager) {
         this.parentFrame = parentFrame;
         this.sessionManager = sessionManager;
         this.username = System.getProperty("user.name");
-        this.hotFolderPath = "C:\\Users\\" + username + "\\Desktop\\Declaratii nesemnate";
-        this.signedDocsFolderPath = "C:\\Documents\\contai\\declaratii semnate";
-        this.spvDocsFolderPath = "C:\\Documents\\contai\\documente SPV";
+        this.prefs =  Preferences.userRoot().node(ContAiApp.class.getName());
+        this.hotFolderPath = prefs.get(HOT_FOLDER_PATH_KEY, null);
+        this.signedDocsFolderPath = prefs.get(SIGNED_DOCS_FOLDER_PATH_KEY, null);
+        this.spvDocsFolderPath = prefs.get(SPV_DOCS_FOLDER_PATH_KEY, null);
         createFolders();
     }
     
@@ -203,9 +210,10 @@ public class FolderPathPage {
         gbc1.insets = new Insets(50, 50, 50, 50); 
         gbc1.fill = GridBagConstraints.HORIZONTAL;
 
-        JPanel folder1 = createFolderSelectionPanel(hotFolderPath, "/images/bi_folder.png", false);
-        JPanel folder2 = createFolderSelectionPanel(signedDocsFolderPath, "/images/bi_folder_change.png", true);
-        JPanel folder3 = createFolderSelectionPanel(spvDocsFolderPath, "/images/bi_folder_change.png", true);
+        JPanel folder1 = createFolderSelectionPanel(hotFolderPath, "/images/bi_folder.png", false, 1);
+        JPanel folder2 = createFolderSelectionPanel(signedDocsFolderPath, "/images/bi_folder_change.png", true, 2);
+        JPanel folder3 = createFolderSelectionPanel(spvDocsFolderPath, "/images/bi_folder_change.png", true, 3);
+
 
         gbc1.gridx = 0;
         gbc1.gridy = 0;
@@ -276,7 +284,7 @@ public class FolderPathPage {
         return panel;
     }
 
-    private JPanel createFolderSelectionPanel(String path, String iconPath, boolean isEditable) {
+    private JPanel createFolderSelectionPanel(String path, String iconPath, boolean isEditable, int folderType) {
         JPanel folderPanel = new JPanel(new GridBagLayout());
         folderPanel.setBackground(Color.WHITE);
 
@@ -305,14 +313,31 @@ public class FolderPathPage {
                     File defaultDirectory = new File(path);
                     fileChooser.setCurrentDirectory(defaultDirectory);
 
-                    // Add a file filter to show only PDF files
-                    fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("PDF Files", "pdf"));
-
                     // Show the dialog and allow user to select files or directories
                     int option = fileChooser.showOpenDialog(parentFrame);
                     if (option == JFileChooser.APPROVE_OPTION) {
                         File file = fileChooser.getSelectedFile();
                         pathField.setText(file.getAbsolutePath());
+
+                        // Update the appropriate folder path based on the folderType
+                        switch (folderType) {
+                            case 1:
+                                hotFolderPath = file.getAbsolutePath();
+                                prefs.put(HOT_FOLDER_PATH_KEY, file.getAbsolutePath());
+                                break;
+                            case 2:
+                                signedDocsFolderPath = file.getAbsolutePath();
+                                prefs.put(SIGNED_DOCS_FOLDER_PATH_KEY, file.getAbsolutePath());
+                                break;
+                            case 3:
+                                spvDocsFolderPath = file.getAbsolutePath();
+                                prefs.put(SPV_DOCS_FOLDER_PATH_KEY, file.getAbsolutePath());
+                                break;
+                        }
+                        
+                        LOGGER.info(signedDocsFolderPath);
+                        LOGGER.info(spvDocsFolderPath);
+
                     } else {
                         // Reset the icon if no file is selected
                         folderIcon.setIcon(new ImageIcon(scaledImage));
@@ -337,6 +362,7 @@ public class FolderPathPage {
 
         return folderPanel;
     }
+
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {

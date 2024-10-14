@@ -16,7 +16,12 @@ public class SessionManager {
     private static final Logger LOGGER = Logger.getLogger(SessionManager.class);
     private static final String AUTH_TOKEN_KEY = "authToken";
     private static final String PAGE_KEY = "page";
+    private static final String HOT_FOLDER_PATH_KEY = "hotFolderPath";
+    private static final String SIGNED_DOCS_FOLDER_PATH_KEY = "signedDocsFolderPath";
+    private static final String SPV_DOCS_FOLDER_PATH_KEY = "spvDocsFolderPath";
+    
 
+    
     private JFrame mainFrame;
     private Preferences prefs;
     private PlanExecutor planExecutor;
@@ -31,6 +36,8 @@ public class SessionManager {
         String authToken = prefs.get(AUTH_TOKEN_KEY, null);
         LOGGER.info("Auth token status: " + (authToken != null ? "Found" : "Not found"));
 
+        initializeFolderPaths();
+        
         if (authToken != null && isTokenValid(authToken)) {
             LOGGER.info("Valid auth token found, proceeding to folder path setup.");
             showFolderPathPage(mainFrame);
@@ -180,5 +187,31 @@ public class SessionManager {
 
     public PlanExecutor getPlanExecutor() {
         return planExecutor;
+    }
+    
+    
+    private void initializeFolderPaths() {
+        // Get folder paths from Preferences (if available)
+        String hotFolderPath = prefs.get(HOT_FOLDER_PATH_KEY, null);
+        String signedDocsFolderPath = prefs.get(SIGNED_DOCS_FOLDER_PATH_KEY, null);
+        String spvDocsFolderPath = prefs.get(SPV_DOCS_FOLDER_PATH_KEY, null);
+        
+        if (hotFolderPath == null || signedDocsFolderPath == null || spvDocsFolderPath == null) {
+            // First time setup: store default paths
+            LOGGER.info("Setting default folder paths...");
+            hotFolderPath = "C:\\Users\\" + System.getProperty("user.name") + "\\Desktop\\Declaratii nesemnate";
+            signedDocsFolderPath = "C:\\Documents\\contai\\declaratii semnate";
+            spvDocsFolderPath = "C:\\Documents\\contai\\documente SPV";
+            
+            prefs.put(HOT_FOLDER_PATH_KEY, hotFolderPath);
+            prefs.put(SIGNED_DOCS_FOLDER_PATH_KEY, signedDocsFolderPath);
+            prefs.put(SPV_DOCS_FOLDER_PATH_KEY, spvDocsFolderPath);
+        } else {
+            // Retrieve paths from Preferences
+            LOGGER.info("Folder paths retrieved from cookies (Preferences):");
+            LOGGER.info("Hot folder path: " + hotFolderPath);
+            LOGGER.info("Signed docs folder path: " + signedDocsFolderPath);
+            LOGGER.info("SPV docs folder path: " + spvDocsFolderPath);
+        }
     }
 }

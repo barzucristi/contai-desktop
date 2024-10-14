@@ -9,9 +9,13 @@ import java.util.List;
 import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.prefs.Preferences;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+
+import contai.ContAiApp;
 import contai.service.RestCloudActionService;
 import contai.service.RestPlanService;
 import org.apache.log4j.Logger;
@@ -25,12 +29,17 @@ public class PlanExecutor {
     private JsonObject userData;
     private JsonArray cuiData;
     private String storedId;
+    private static final String SPV_DOCS_FOLDER_PATH_KEY = "spvDocsFolderPath";
+    private Preferences prefs;
+    private String spvDocsFolderPath;
 
     public PlanExecutor(String authToken, JsonObject userData, JsonObject cui) {
         this.authToken = authToken;
         this.userData = userData;
         this.timer = new Timer();
         this.cuiData = new JsonArray();
+        this.prefs =  Preferences.userRoot().node(ContAiApp.class.getName());
+        this.spvDocsFolderPath = prefs.get(SPV_DOCS_FOLDER_PATH_KEY, null);
 
         if (cui != null && cui.has("active") && cui.get("active").isJsonArray()) {
             JsonArray activeArray = cui.getAsJsonArray("active");
@@ -171,7 +180,12 @@ public class PlanExecutor {
                 // Trigger specific actions for Plan D
             	logger.info("Executing actions for Plan D with frequency type: " + frequencyType + " and value: " + frequencyValue);
                 break;
-            // Add cases for other plans as needed
+            case "Plan F":
+            	processPlanF(); 
+                // Trigger specific actions for Plan D
+            	logger.info("Executing actions for Plan D with frequency type: " + frequencyType + " and value: " + frequencyValue);
+                break;     
+            // Add cases for other plans as needed     
             default:
 //            	logger.info("Unknown plan: " + planName);
                 break;
@@ -361,7 +375,7 @@ public class PlanExecutor {
             long maxId = -1; 
 
             for (String id : extractedIds) {
-                File file = RestPlanService.getFile("https://webserviced.anaf.ro/SPVWS2/rest/descarcare?id="+id,"C:\\Documents\\contai\\documente SPV");  
+                File file = RestPlanService.getFile("https://webserviced.anaf.ro/SPVWS2/rest/descarcare?id="+id,spvDocsFolderPath);  
                
                 long numericId = Long.parseLong(id.trim());
 
@@ -446,6 +460,11 @@ public class PlanExecutor {
         }
     }
     
+    private void processPlanF() {
+    
+    	
+    }
+
     public void cleanup() {
         if (timer != null) {
             timer.cancel();
