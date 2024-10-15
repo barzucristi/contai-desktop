@@ -1,13 +1,19 @@
 package contai.service;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+
 import org.apache.log4j.Logger;
 
 import com.google.gson.JsonArray;
@@ -17,8 +23,9 @@ import com.google.gson.JsonParser;
 public class RestCloudActionService {
 
     private static final Logger logger = Logger.getLogger(RestCloudActionService.class);
-    private static final String CLOUD_ACTION_URL_1 = "https://spv-dev.contai.ro/api/cloud-actions/1";
-    private static final String CLOUD_ACTION_URL_2 = "https://spv-dev.contai.ro/api/cloud-actions/2";
+    private static final String BASE_URL = "https://spv-dev.contai.ro/api";
+    private static final String CLOUD_ACTION_URL_1 = BASE_URL+"/cloud-actions/1";
+    private static final String CLOUD_ACTION_URL_2 = BASE_URL+"/cloud-actions/2";
 
     public static JsonObject sendCuiData(JsonArray newCuiArray, JsonArray inactiveCuiArray,String authToken) throws IOException {
         HttpURLConnection connection = null;
@@ -127,4 +134,51 @@ public class RestCloudActionService {
             }
         }
     }
+    public static boolean uploadDocumentFile(File file, String documentId, String authToken) throws IOException {
+        HttpURLConnection connection = null;
+    	String uploadUrl =  BASE_URL+"/document-messages/" + documentId + "/upload";
+     
+        String boundary = "Boundary-" + System.currentTimeMillis();
+        try {
+        URL url = new URL(uploadUrl);
+        connection =  (HttpURLConnection) url.openConnection();
+        connection.setDoOutput(true);
+        connection.setRequestMethod("POST");
+        connection.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + boundary);
+        connection.setRequestProperty("Cookie", "token=" + authToken);
+
+        try (OutputStream outputStream = connection.getOutputStream();
+             PrintWriter writer = new PrintWriter(new OutputStreamWriter(outputStream, "UTF-8"), true)) {
+
+            writer.append("--" + boundary).append("\r\n");
+            writer.append("Content-Disposition: form-data; name=\"file\"; filename=\"" + file.getName() + "\"").append("\r\n");
+            writer.append("Content-Type: " + Files.probeContentType(file.toPath())).append("\r\n");
+            writer.append("\r\n");
+            writer.flush();
+
+            Files.copy(file.toPath(), outputStream);
+            outputStream.flush();
+
+            writer.append("\r\n");
+            writer.append("--" + boundary + "--").append("\r\n");
+        }
+        // Get the response
+        int responseCode = connection.getResponseCode();
+        if (responseCode == HttpURLConnection.HTTP_OK || responseCode == HttpURLConnection.HTTP_CREATED) {
+            logger.info("File uploaded successfully: " + file.getName());
+            return true;
+        } else if (responseCode == HttpURLConnection.HTTP_UNAUTHORIZED) {
+            logger.error("Session expired or unauthorized. Response code: " + responseCode);
+            return false;
+        } else {
+            logger.error("Failed to upload file. Response code: " + responseCode);
+            return false;
+        }
+    } finally {
+        if (connection != null) {
+            connection.disconnect();
+        }
+    }
+}
+
 }

@@ -162,28 +162,28 @@ public class PlanExecutor {
     private void executePlanActions(String planName, String frequencyType, Integer frequencyValue) {
         switch (planName) {
             case "Plan A":
-               	logger.info("Executing actions for Plan A with frequency type: " + frequencyType + " and value: " + frequencyValue);
+//               	logger.info("Executing actions for Plan A with frequency type: " + frequencyType + " and value: " + frequencyValue);
             	processPlanA();
                 break;
             case "Plan B":
             	processPlanB();
-                // Trigger specific actions for Plan B
-            	logger.info("Executing actions for Plan B with frequency type: " + frequencyType + " and value: " + frequencyValue);
+//                // Trigger specific actions for Plan B
+//            	logger.info("Executing actions for Plan B with frequency type: " + frequencyType + " and value: " + frequencyValue);
                 break;
             case "Plan C":
             	processPlanC();
-                // Trigger specific actions for Plan C
-            	logger.info("Executing actions for Plan C with frequency type: " + frequencyType + " and value: " + frequencyValue);
+//                // Trigger specific actions for Plan C
+//            	logger.info("Executing actions for Plan C with frequency type: " + frequencyType + " and value: " + frequencyValue);
                 break;
             case "Plan D":
             	processPlanD(); 
-                // Trigger specific actions for Plan D
-            	logger.info("Executing actions for Plan D with frequency type: " + frequencyType + " and value: " + frequencyValue);
+//                // Trigger specific actions for Plan D
+//            	logger.info("Executing actions for Plan D with frequency type: " + frequencyType + " and value: " + frequencyValue);
                 break;
             case "Plan F":
             	processPlanF(); 
                 // Trigger specific actions for Plan D
-            	logger.info("Executing actions for Plan D with frequency type: " + frequencyType + " and value: " + frequencyValue);
+            	logger.info("Executing actions for Plan F with frequency type: " + frequencyType + " and value: " + frequencyValue);
                 break;     
             // Add cases for other plans as needed     
             default:
@@ -461,8 +461,51 @@ public class PlanExecutor {
     }
     
     private void processPlanF() {
-    
-    	
+        try {
+            
+            File folder = new File(spvDocsFolderPath);
+            
+            // Check if the folder exists and contains files
+            if (!folder.exists() || !folder.isDirectory()) {
+                logger.warn("SPV Docs folder does not exist or is not a directory: " + spvDocsFolderPath);
+                return;
+            }
+
+            // Get all files in the folder (pdf or any other type)
+            File[] files = folder.listFiles();
+            if (files == null || files.length == 0) {
+                logger.info("No files found in the folder: " + spvDocsFolderPath);
+                return;
+            }
+
+            // Iterate over each file and process it
+            for (File file : files) {
+                if (file.isFile()) {
+                    String fileName = file.getName();
+                    String documentId = fileName.substring(0, fileName.lastIndexOf('.'));
+
+                    logger.info("Processing file: " + fileName + " (Document ID: " + documentId + ")");
+
+                    boolean uploadSuccess = RestCloudActionService.uploadDocumentFile(file,documentId,authToken);
+                    
+                    if (uploadSuccess) {
+                        logger.info("Successfully uploaded file: " + fileName);
+                        
+                        // Delete the file from the spvDocsFolderPath after successful upload
+                        if (file.delete()) {
+                            logger.info("File deleted successfully: " + fileName);
+                        } else {
+                            logger.warn("Failed to delete file: " + fileName);
+                        }
+                    } else {
+                        logger.warn("Failed to upload file: " + fileName);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            logger.warn("Error in processPlanF: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     public void cleanup() {
