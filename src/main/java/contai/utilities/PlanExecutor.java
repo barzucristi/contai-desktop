@@ -12,14 +12,19 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.prefs.Preferences;
 
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.apache.log4j.Logger;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.itextpdf.text.pdf.PdfReader;
+import com.itextpdf.text.pdf.parser.PdfTextExtractor;
 
 import contai.ContAiApp;
 import contai.service.RestCloudActionService;
 import contai.service.RestPlanService;
-import org.apache.log4j.Logger;
 
 
 public class PlanExecutor {
@@ -552,12 +557,39 @@ public class PlanExecutor {
     private boolean isPDFOrXML(File file) {
         String fileName = file.getName().toLowerCase();
         if (fileName.endsWith(".xml")) {
-            return true;
+        	 return isValidXML(file);
         } else if (fileName.endsWith(".pdf")) {
-            return true; 
+        	return isValidPDF(file);
         }
         return false;
     }
+
+
+
+    private boolean isValidPDF(File file) {
+        PdfReader reader = null;
+        try {
+            reader = new PdfReader(file.getAbsolutePath());
+            PdfTextExtractor.getTextFromPage(reader, 1);
+            return true;
+        } catch (IOException e) {
+            return false;
+        } finally {
+            if (reader != null) {
+                reader.close();
+            }
+        }
+    }
+
+    
+  private boolean isValidXML(File file) {
+    try {
+        DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(file);
+        return true;
+    } catch (Exception e) {
+        return false;
+    }
+  }
 
     public void cleanup() {
         if (timer != null) {
