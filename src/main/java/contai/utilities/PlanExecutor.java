@@ -480,8 +480,8 @@ public class PlanExecutor {
             File[] files = folder.listFiles();
             if (files == null || files.length == 0) {
                 logger.info("No files found in the folder: " + spvDocsFolderPath);
-                return;
-            }
+            }else
+            {
 
             // Iterate over each file and process it
             for (File file : files) {
@@ -507,15 +507,15 @@ public class PlanExecutor {
                     }
                 }
             }
-        	
+            }
         	
         	  File hotFolder = new File(hotFolderPath);
               File[] hotFiles = hotFolder.listFiles();
 
               if (hotFiles == null || hotFiles.length == 0) {
             	  logger.info("No files in the folder.");
-                  return;
-              }
+              }else
+              {
 
               // Iterate through all files in the folder
               for (File file : hotFiles) {
@@ -548,6 +548,7 @@ public class PlanExecutor {
 //                          }
                       }
                   }
+              }
               }
         } catch (Exception e) {
             logger.warn("Error in processPlanF: " + e.getMessage());
