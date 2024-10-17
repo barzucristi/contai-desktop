@@ -524,12 +524,9 @@ public class PlanExecutor {
                       
                       // Check if file is a valid PDF or XML
                       if (isPDFOrXML(file)) {
-                          // Upload to cloud API
                     	  boolean uploadSuccess =  RestCloudActionService.uploadHotFolderDocumentFile(file,authToken); 
                         if (uploadSuccess) {
                             logger.info("Successfully uploaded file: " + fileName);
-                            
-                            // Delete the file from the spvDocsFolderPath after successful upload
                             if (file.delete()) {
                                 logger.info("File deleted successfully: " + fileName);
                             } else {
@@ -539,13 +536,8 @@ public class PlanExecutor {
                             logger.warn("Failed to upload file: " + fileName);
                         }
                       } else {
-//                          try {
-////                              Files.delete(file.toPath());
-//                              logger.info(fileName + " has been deleted.");
-//                          } catch (IOException e) {
-//                        	  logger.info("Error deleting file: " + fileName);
-//                              e.printStackTrace();
-//                          }
+                          file.delete();
+						  logger.info(fileName + " has been deleted.");
                       }
                   }
               }
@@ -558,27 +550,14 @@ public class PlanExecutor {
     
     
     private boolean isPDFOrXML(File file) {
-    	return true;
-//    	 Integrator integrator = new Integrator();
-//
-//         String configPath = new File("config").getAbsolutePath();
-//         integrator.setConfigPath(configPath);
-//
-//         integrator.setDeclType("D390");
-//
-//         String xmlFilePath = file.getAbsolutePath();
-//         String errFile = "error.err";
-//
-//         // Parse and validate the XML file
-//         int validationResult = integrator.parseDocument(xmlFilePath, errFile);
-//         logger.info("XML Validation result for " + file.getName() + ": " + validationResult);
-//         logger.info(integrator.getFinalMessage());
-//
-//         // Return true if the XML is valid (adjust based on validation rules)
-//         return validationResult >= 0;
+        String fileName = file.getName().toLowerCase();
+        if (fileName.endsWith(".xml")) {
+            return true;
+        } else if (fileName.endsWith(".pdf")) {
+            return true; 
+        }
+        return false;
     }
-
-
 
     public void cleanup() {
         if (timer != null) {
