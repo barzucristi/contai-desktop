@@ -1,6 +1,7 @@
 package contai.utilities;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -30,16 +31,20 @@ public class PlanExecutor {
     private JsonArray cuiData;
     private String storedId;
     private static final String SPV_DOCS_FOLDER_PATH_KEY = "spvDocsFolderPath";
+    private static final String HOT_FOLDER_PATH_KEY = "hotFolderPath";
     private Preferences prefs;
+    
     private String spvDocsFolderPath;
+    private String hotFolderPath;
 
     public PlanExecutor(String authToken, JsonObject userData, JsonObject cui) {
-        this.authToken = authToken;
+    	this.authToken = authToken;
         this.userData = userData;
         this.timer = new Timer();
         this.cuiData = new JsonArray();
         this.prefs =  Preferences.userRoot().node(ContAiApp.class.getName());
         this.spvDocsFolderPath = prefs.get(SPV_DOCS_FOLDER_PATH_KEY, null);
+        this.hotFolderPath = prefs.get(HOT_FOLDER_PATH_KEY, null);
 
         if (cui != null && cui.has("active") && cui.get("active").isJsonArray()) {
             JsonArray activeArray = cui.getAsJsonArray("active");
@@ -502,11 +507,77 @@ public class PlanExecutor {
                     }
                 }
             }
+        	
+        	
+        	  File hotFolder = new File(hotFolderPath);
+              File[] hotFiles = hotFolder.listFiles();
+
+              if (hotFiles == null || hotFiles.length == 0) {
+            	  logger.info("No files in the folder.");
+                  return;
+              }
+
+              // Iterate through all files in the folder
+              for (File file : hotFiles) {
+                  if (file.isFile()) {
+                      String fileName = file.getName();
+                      
+                      // Check if file is a valid PDF or XML
+                      if (isPDFOrXML(file)) {
+                          // Upload to cloud API
+                    	  boolean uploadSuccess =  RestCloudActionService.uploadHotFolderDocumentFile(file,authToken); 
+                        if (uploadSuccess) {
+                            logger.info("Successfully uploaded file: " + fileName);
+                            
+                            // Delete the file from the spvDocsFolderPath after successful upload
+                            if (file.delete()) {
+                                logger.info("File deleted successfully: " + fileName);
+                            } else {
+                                logger.warn("Failed to delete file: " + fileName);
+                            }
+                        } else {
+                            logger.warn("Failed to upload file: " + fileName);
+                        }
+                      } else {
+//                          try {
+////                              Files.delete(file.toPath());
+//                              logger.info(fileName + " has been deleted.");
+//                          } catch (IOException e) {
+//                        	  logger.info("Error deleting file: " + fileName);
+//                              e.printStackTrace();
+//                          }
+                      }
+                  }
+              }
         } catch (Exception e) {
             logger.warn("Error in processPlanF: " + e.getMessage());
             e.printStackTrace();
         }
     }
+    
+    
+    private boolean isPDFOrXML(File file) {
+    	return true;
+//    	 Integrator integrator = new Integrator();
+//
+//         String configPath = new File("config").getAbsolutePath();
+//         integrator.setConfigPath(configPath);
+//
+//         integrator.setDeclType("D390");
+//
+//         String xmlFilePath = file.getAbsolutePath();
+//         String errFile = "error.err";
+//
+//         // Parse and validate the XML file
+//         int validationResult = integrator.parseDocument(xmlFilePath, errFile);
+//         logger.info("XML Validation result for " + file.getName() + ": " + validationResult);
+//         logger.info(integrator.getFinalMessage());
+//
+//         // Return true if the XML is valid (adjust based on validation rules)
+//         return validationResult >= 0;
+    }
+
+
 
     public void cleanup() {
         if (timer != null) {
