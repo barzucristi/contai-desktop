@@ -1,6 +1,7 @@
 package contai.utilities;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -12,19 +13,20 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.prefs.Preferences;
 
-import javax.xml.parsers.DocumentBuilderFactory;
-
-import org.apache.log4j.Logger;
-
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.itextpdf.text.pdf.PdfDocument;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.parser.PdfTextExtractor;
 
 import contai.ContAiApp;
 import contai.service.RestCloudActionService;
 import contai.service.RestPlanService;
+import org.apache.log4j.Logger;
+
+import javax.xml.parsers.DocumentBuilderFactory;
+//import org.apache.pdfbox.pdmodel.PDDocument;
 
 
 public class PlanExecutor {
@@ -41,6 +43,8 @@ public class PlanExecutor {
     
     private String spvDocsFolderPath;
     private String hotFolderPath;
+    private static final long MAX_FILE_SIZE = 2 * 1024 * 1024; // 2 MB
+    private static final String OVERSIZE_PREFIX = "oversize_";
 
     public PlanExecutor(String authToken, JsonObject userData, JsonObject cui) {
     	this.authToken = authToken;
@@ -63,12 +67,12 @@ public class PlanExecutor {
 
 
     public void setupPlans() {
-        if (userData != null && userData.has("current_subscription")) {
-            JsonObject subscription = userData.getAsJsonObject("current_subscription");
-            if (subscription.has("stripe_plan")) {
-                JsonObject stripePlan = subscription.getAsJsonObject("stripe_plan");
-                if (stripePlan.has("desktop_plans")) {
-                    JsonArray desktopPlans = stripePlan.getAsJsonArray("desktop_plans");
+        if (userData != null && userData.has("organization")) {
+            JsonObject organization = userData.getAsJsonObject("organization");
+            if (organization.has("current_plan")) {
+                JsonObject currentPlan = organization.getAsJsonObject("current_plan");
+                if (currentPlan.has("desktop_plans")) {
+                    JsonArray desktopPlans = currentPlan.getAsJsonArray("desktop_plans");
                     for (JsonElement planElement : desktopPlans) {
                         JsonObject plan = planElement.getAsJsonObject();
                         if (plan.get("active").getAsBoolean()) {
@@ -475,13 +479,6 @@ public class PlanExecutor {
             
             File folder = new File(spvDocsFolderPath);
             
-            // Check if the folder exists and contains files
-            if (!folder.exists() || !folder.isDirectory()) {
-                logger.warn("SPV Docs folder does not exist or is not a directory: " + spvDocsFolderPath);
-                return;
-            }
-
-            // Get all files in the folder (pdf or any other type)
             File[] files = folder.listFiles();
             if (files == null || files.length == 0) {
                 logger.info("No files found in the folder: " + spvDocsFolderPath);
@@ -489,8 +486,9 @@ public class PlanExecutor {
             {
 
             // Iterate over each file and process it
-            for (File file : files) {
-                if (file.isFile()) {
+            	  for (File fileUpload : files) {
+                      if (fileUpload.isFile()) {
+                    	File file = checkAndRenameOversizedFile(fileUpload);
                     String fileName = file.getName();
                     String documentId = fileName.substring(0, fileName.lastIndexOf('.'));
 
@@ -523,8 +521,9 @@ public class PlanExecutor {
               {
 
               // Iterate through all files in the folder
-              for (File file : hotFiles) {
-                  if (file.isFile()) {
+              for (File fileUpload : hotFiles) {
+                  if (fileUpload.isFile()) {
+                	File file = checkAndRenameOversizedFile(fileUpload);
                       String fileName = file.getName();
                       
                       // Check if file is a valid PDF or XML
@@ -570,6 +569,7 @@ public class PlanExecutor {
         PdfReader reader = null;
         try {
             reader = new PdfReader(file.getAbsolutePath());
+
             PdfTextExtractor.getTextFromPage(reader, 1);
             return true;
         } catch (IOException e) {
@@ -591,6 +591,23 @@ public class PlanExecutor {
     }
   }
 
+  private static File checkAndRenameOversizedFile(File originalFile) throws IOException {
+      if (originalFile.length() > MAX_FILE_SIZE) {
+          String originalName = originalFile.getName();
+          String newName = OVERSIZE_PREFIX + originalName;
+          File renamedFile = new File(originalFile.getParent(), newName);
+          
+          if (originalFile.renameTo(renamedFile)) {
+              logger.info("File renamed to: " + newName);
+              return renamedFile;
+          } else {
+              logger.error("Failed to rename oversized file: " + originalName);
+              return originalFile; 
+          }
+      }
+      return originalFile;
+  }
+  
     public void cleanup() {
         if (timer != null) {
             timer.cancel();
