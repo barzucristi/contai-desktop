@@ -52,7 +52,7 @@ public class PlanExecutor {
           this.cuiData = new JsonArray();
           this.prefs = Preferences.userRoot().node(ContAiApp.class.getName());
           this.spvDocsFolderPath = prefs.get(SPV_DOCS_FOLDER_PATH_KEY, null);
-          this.hotFolderPath = prefs.get(SPV_DOCS_FOLDER_PATH_KEY, null);
+          this.hotFolderPath = prefs.get(HOT_FOLDER_PATH_KEY, null);
 
           if (cui != null && cui.has("active") && cui.get("active").isJsonArray()) {
                JsonArray activeArray = cui.getAsJsonArray("active");
