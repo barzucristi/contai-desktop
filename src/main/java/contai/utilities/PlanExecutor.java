@@ -9,6 +9,8 @@ import com.itextpdf.text.pdf.parser.PdfTextExtractor;
 import contai.ContAiApp;
 import contai.service.RestCloudActionService;
 import contai.service.RestPlanService;
+import contai.service.RestSecurityService;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -39,6 +41,7 @@ public class PlanExecutor {
      private static final String SPV_DOCS_FOLDER_PATH_KEY = "spvDocsFolderPath";
      private static final String HOT_FOLDER_PATH_KEY = "hotFolderPath";
      private Preferences prefs;
+     private JsonArray pinCertificates;
 
      private String spvDocsFolderPath;
      private String hotFolderPath;
@@ -54,6 +57,26 @@ public class PlanExecutor {
           this.spvDocsFolderPath = prefs.get(SPV_DOCS_FOLDER_PATH_KEY, null);
           this.hotFolderPath = prefs.get(HOT_FOLDER_PATH_KEY, null);
 
+          try {
+        	    JsonObject response = RestSecurityService.getAllPinCertificates(authToken);
+        	    JsonObject data = response.getAsJsonObject("data");
+        	    this.pinCertificates = (response.get("success").getAsBoolean() && data.has("security_tokens")) 
+        	                            ? data.getAsJsonArray("security_tokens") 
+        	                            : new JsonArray();
+        	} catch (Exception e) {
+        	    logger.error("Error retrieving pin certificates: " + e.getMessage(), e);
+        	    this.pinCertificates = new JsonArray();
+        	}
+
+          try {
+      	   JsonObject response = RestSecurityService.getAddAllCertificates(authToken);
+      	  logger.error("=================="+response);
+       
+      	} catch (Exception e) {
+      	    logger.error("Error retrieving adding  certificates: " + e.getMessage(), e);
+      	    this.pinCertificates = new JsonArray();
+      	}
+          
           if (cui != null && cui.has("active") && cui.get("active").isJsonArray()) {
                JsonArray activeArray = cui.getAsJsonArray("active");
                for (JsonElement element : activeArray) {
@@ -62,6 +85,7 @@ public class PlanExecutor {
                     }
                }
           }
+                
      }
 
      public void setupPlans() {
@@ -257,6 +281,20 @@ public class PlanExecutor {
 
      private void executePlanActions(
          String planName, String frequencyType, Integer frequencyValue) {
+    	 
+    	 boolean isMasterAppEnabled = checkMasterAppCondition(); // Assuming you have a method for this check
+         logger.info(isMasterAppEnabled+"isMasterAppEnabled");
+         
+    	    if (!isMasterAppEnabled) {
+    	        if (planName.equals("Plan A") || planName.equals("Plan B") || 
+    	            planName.equals("Plan C") || planName.equals("Plan D") || 
+    	            planName.equals("Plan G") || planName.equals("Plan H") ) {
+    	            logger.info("Skipping execution of " + planName + " because master_app is false.");
+    	            return;
+    	        }
+    	    }
+
+    	    
           switch (planName) {
                case "Plan A":
                     //               	logger.info("Executing actions for Plan A with frequency
@@ -293,6 +331,14 @@ public class PlanExecutor {
                     break;
           }
      }
+     
+     private boolean checkMasterAppCondition() {
+    	    if (userData != null && userData.has("master_app")) {
+    	        return userData.get("master_app").getAsBoolean();
+    	    }
+    	    return false; 
+    	}
+
 
      private void processPlanA() {
           try {
