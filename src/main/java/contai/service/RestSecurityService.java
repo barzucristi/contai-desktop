@@ -50,12 +50,10 @@ public class RestSecurityService {
                     certificatesArray.add(certObject);
                 }
             }
-            LOGGER.info(certificatesArray + "====certificatesArray==================");
+         
             // Check if the certificatesArray is not empty before adding it to requestBody
             if (certificatesArray.size() > 0) {
                 requestBody.add("certificates", certificatesArray);
-                LOGGER.info(requestBody + "====requestBody==================");
-
                 // Set up the POST request
                 URL url = new URL(SECURITY_TOKENS_URL); // Replace SECURITY_TOKENS_URL with the actual URL
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -89,9 +87,50 @@ public class RestSecurityService {
         return requestBody;
     }
 
+    public static JsonObject getAllPinCertificates(String authToken) throws IOException {
+        return sendGetRequest(SECURITY_TOKENS_URL, authToken);
+    }
+
+    private static JsonObject sendGetRequest(String urlString, String authToken) throws IOException {
+        HttpURLConnection connection = null;
+        try {
+            URL url = new URL(urlString);
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setRequestProperty("Content-Type", "application/json");
+            connection.setRequestProperty("Accept", "application/json");
+            connection.setRequestProperty("Cookie", "token=" + authToken);
+            connection.setDoOutput(true);
+
+            // Read response
+            InputStream stream = connection.getResponseCode() == HttpURLConnection.HTTP_OK
+                    ? connection.getInputStream()
+                    : connection.getErrorStream();
+
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8))) {
+                StringBuilder response = new StringBuilder();
+                String responseLine;
+                while ((responseLine = br.readLine()) != null) {
+                    response.append(responseLine.trim());
+                }
+                try {
+                    LOGGER.info("Response: " + response.toString());
+                    return new JsonParser().parse(response.toString()).getAsJsonObject();
+                } catch (JsonSyntaxException e) {
+                    LOGGER.error("Failed to parse JSON response", e);
+                    throw new IOException("Failed to parse JSON response", e);
+                }
+            }
+        } finally {
+            if (connection != null) {
+                connection.disconnect();
+            }
+        }
+    }
+    
+
 
     public static JsonObject listAllEvents(String authToken) throws IOException {
-    	
         return sendGetRequest(POLLING_URL, authToken);
     }
 
@@ -136,44 +175,4 @@ public class RestSecurityService {
         }
     }
 
-    public static JsonObject getAllPinCertificates(String authToken) throws IOException {
-        return sendGetRequest(SECURITY_TOKENS_URL, authToken);
-    }
-
-    private static JsonObject sendGetRequest(String urlString, String authToken) throws IOException {
-        HttpURLConnection connection = null;
-        try {
-            URL url = new URL(urlString);
-            connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("GET");
-            connection.setRequestProperty("Content-Type", "application/json");
-            connection.setRequestProperty("Accept", "application/json");
-            connection.setRequestProperty("Cookie", "token=" + authToken);
-            connection.setDoOutput(true);
-
-            // Read response
-            InputStream stream = connection.getResponseCode() == HttpURLConnection.HTTP_OK
-                    ? connection.getInputStream()
-                    : connection.getErrorStream();
-
-            try (BufferedReader br = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8))) {
-                StringBuilder response = new StringBuilder();
-                String responseLine;
-                while ((responseLine = br.readLine()) != null) {
-                    response.append(responseLine.trim());
-                }
-                try {
-                    LOGGER.info("Response: " + response.toString());
-                    return new JsonParser().parse(response.toString()).getAsJsonObject();
-                } catch (JsonSyntaxException e) {
-                    LOGGER.error("Failed to parse JSON response", e);
-                    throw new IOException("Failed to parse JSON response", e);
-                }
-            }
-        } finally {
-            if (connection != null) {
-                connection.disconnect();
-            }
-        }
-    }
 }

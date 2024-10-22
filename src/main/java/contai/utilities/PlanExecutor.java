@@ -10,7 +10,6 @@ import contai.ContAiApp;
 import contai.service.RestCloudActionService;
 import contai.service.RestPlanService;
 import contai.service.RestSecurityService;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -57,26 +56,10 @@ public class PlanExecutor {
           this.spvDocsFolderPath = prefs.get(SPV_DOCS_FOLDER_PATH_KEY, null);
           this.hotFolderPath = prefs.get(HOT_FOLDER_PATH_KEY, null);
 
-          try {
-        	    JsonObject response = RestSecurityService.getAllPinCertificates(authToken);
-        	    JsonObject data = response.getAsJsonObject("data");
-        	    this.pinCertificates = (response.get("success").getAsBoolean() && data.has("security_tokens")) 
-        	                            ? data.getAsJsonArray("security_tokens") 
-        	                            : new JsonArray();
-        	} catch (Exception e) {
-        	    logger.error("Error retrieving pin certificates: " + e.getMessage(), e);
-        	    this.pinCertificates = new JsonArray();
-        	}
+          getAllPinCertificates();
+          getPostAllCertificate();
+          startEventPolling();
 
-          try {
-      	   JsonObject response = RestSecurityService.getAddAllCertificates(authToken);
-      	  logger.error("=================="+response);
-       
-      	} catch (Exception e) {
-      	    logger.error("Error retrieving adding  certificates: " + e.getMessage(), e);
-      	    this.pinCertificates = new JsonArray();
-      	}
-          
           if (cui != null && cui.has("active") && cui.get("active").isJsonArray()) {
                JsonArray activeArray = cui.getAsJsonArray("active");
                for (JsonElement element : activeArray) {
@@ -85,7 +68,50 @@ public class PlanExecutor {
                     }
                }
           }
-                
+     }
+
+     private void getAllPinCertificates() {
+          try {
+               JsonObject response = RestSecurityService.getAllPinCertificates(authToken);
+               JsonObject data = response.getAsJsonObject("data");
+               this.pinCertificates = (response.get("success").getAsBoolean() && data.has("security_tokens")) ? data.getAsJsonArray("security_tokens") : new JsonArray();
+          } catch (Exception e) {
+               logger.error("Error retrieving pin certificates: " + e.getMessage(), e);
+               this.pinCertificates = new JsonArray();
+          }
+     }
+
+     private void getPostAllCertificate() {
+          try {
+               JsonObject response = RestSecurityService.getAddAllCertificates(authToken);
+          } catch (Exception e) {
+               logger.error("Error retrieving adding  certificates: " + e.getMessage(), e);
+          }
+     }
+
+     private void startEventPolling() {
+          timer.scheduleAtFixedRate(new TimerTask() {
+               @Override
+               public void run() {
+                    try {
+                         JsonObject response = RestSecurityService.listAllEvents(authToken);
+                         logger.info("All Events====" + response);
+
+                         if (response.get("success").getAsBoolean() && response.has("data")) {
+                              JsonArray eventsData = response.getAsJsonArray("data");
+                              if (eventsData.size() > 0) {
+                                   logger.info("Fetched events: " + eventsData);
+                              } else {
+                                   logger.warn("No events found in the response data.");
+                              }
+                         } else {
+                              logger.error("Error in response: " + response.get("message").getAsString());
+                         }
+                    } catch (Exception e) {
+                         logger.error("Error retrieving all events: " + e.getMessage(), e);
+                    }
+               }
+          }, 0, 5000); // Initial delay 0ms, repeat every 10000ms (10 seconds)
      }
 
      public void setupPlans() {
@@ -107,9 +133,7 @@ public class PlanExecutor {
      }
 
      private void setupPlanTrigger(JsonObject plan) {
-          String type = plan.has("frequency_type") && !plan.get("frequency_type").isJsonNull()
-              ? plan.get("frequency_type").getAsString()
-              : "unknown";
+          String type = plan.has("frequency_type") && !plan.get("frequency_type").isJsonNull() ? plan.get("frequency_type").getAsString() : "unknown";
 
           Integer value = null;
 
@@ -118,8 +142,7 @@ public class PlanExecutor {
                try {
                     value = plan.get("frequency_value").getAsInt();
                } catch (UnsupportedOperationException e) {
-                    logger.info("Frequency value is not an integer for plan: "
-                        + plan.get("name").getAsString());
+                    logger.info("Frequency value is not an integer for plan: " + plan.get("name").getAsString());
                }
           }
 
@@ -130,8 +153,7 @@ public class PlanExecutor {
           if (value != null) {
                //     	logger.info("Frequency Value: " + value);
           } else {
-               logger.info(
-                   "Frequency Value is not available for plan: " + plan.get("name").getAsString());
+               logger.info("Frequency Value is not available for plan: " + plan.get("name").getAsString());
           }
 
           // Handle different frequency types
@@ -166,8 +188,7 @@ public class PlanExecutor {
 
                case "days":
                     if (value != null) {
-                         long interval =
-                             value * 24 * 60 * 60 * 1000; // Convert days to milliseconds
+                         long interval = value * 24 * 60 * 60 * 1000; // Convert days to milliseconds
                          timer.scheduleAtFixedRate(new TimerTask() {
                               @Override
                               public void run() {
@@ -254,10 +275,7 @@ public class PlanExecutor {
           logger.info("Triggering plan: " + planName + " at " + currentTime);
 
           // Directly access frequency_type and frequency_value
-          String frequencyType =
-              plan.has("frequency_type") && !plan.get("frequency_type").isJsonNull()
-              ? plan.get("frequency_type").getAsString()
-              : "N/A"; // Default value if 'type' is null
+          String frequencyType = plan.has("frequency_type") && !plan.get("frequency_type").isJsonNull() ? plan.get("frequency_type").getAsString() : "N/A"; // Default value if 'type' is null
 
           // Initialize frequencyValue as null and handle cases where "value" may be missing or null
           Integer frequencyValue = null;
@@ -279,22 +297,17 @@ public class PlanExecutor {
           executePlanActions(planName, frequencyType, frequencyValue);
      }
 
-     private void executePlanActions(
-         String planName, String frequencyType, Integer frequencyValue) {
-    	 
-    	 boolean isMasterAppEnabled = checkMasterAppCondition(); // Assuming you have a method for this check
-         logger.info(isMasterAppEnabled+"isMasterAppEnabled");
-         
-    	    if (!isMasterAppEnabled) {
-    	        if (planName.equals("Plan A") || planName.equals("Plan B") || 
-    	            planName.equals("Plan C") || planName.equals("Plan D") || 
-    	            planName.equals("Plan G") || planName.equals("Plan H") ) {
-    	            logger.info("Skipping execution of " + planName + " because master_app is false.");
-    	            return;
-    	        }
-    	    }
+     private void executePlanActions(String planName, String frequencyType, Integer frequencyValue) {
+          boolean isMasterAppEnabled = checkMasterAppCondition(); // Assuming you have a method for this check
+          logger.info(isMasterAppEnabled + "isMasterAppEnabled");
 
-    	    
+          if (!isMasterAppEnabled) {
+               if (planName.equals("Plan A") || planName.equals("Plan B") || planName.equals("Plan C") || planName.equals("Plan D") || planName.equals("Plan G") || planName.equals("Plan H")) {
+                    logger.info("Skipping execution of " + planName + " because master_app is false.");
+                    return;
+               }
+          }
+
           switch (planName) {
                case "Plan A":
                     //               	logger.info("Executing actions for Plan A with frequency
@@ -322,8 +335,7 @@ public class PlanExecutor {
                case "Plan F":
                     processPlanF();
                     // Trigger specific actions for Plan D
-                    logger.info("Executing actions for Plan F with frequency type: " + frequencyType
-                        + " and value: " + frequencyValue);
+                    logger.info("Executing actions for Plan F with frequency type: " + frequencyType + " and value: " + frequencyValue);
                     break;
                // Add cases for other plans as needed
                default:
@@ -331,14 +343,13 @@ public class PlanExecutor {
                     break;
           }
      }
-     
-     private boolean checkMasterAppCondition() {
-    	    if (userData != null && userData.has("master_app")) {
-    	        return userData.get("master_app").getAsBoolean();
-    	    }
-    	    return false; 
-    	}
 
+     private boolean checkMasterAppCondition() {
+          if (userData != null && userData.has("master_app")) {
+               return userData.get("master_app").getAsBoolean();
+          }
+          return false;
+     }
 
      private void processPlanA() {
           try {
@@ -358,8 +369,7 @@ public class PlanExecutor {
                }
 
                // Then, check from API
-               JsonObject response = RestPlanService.executePlan(
-                   "https://webserviced.anaf.ro/SPVWS2/rest/listaMesaje?zile=1");
+               JsonObject response = RestPlanService.executePlan("https://webserviced.anaf.ro/SPVWS2/rest/listaMesaje?zile=1");
                String cuiString = response.get("cui").getAsString();
                logger.info("api cui response-------" + cuiString);
                // Split the CUI string into an array and add to currentIterationCuiSet
@@ -401,11 +411,9 @@ public class PlanExecutor {
                     inactiveCuiArray.add(inactiveCui);
                }
 
-               logger.info(
-                   "final newCuiArray" + newCuiArray + "inactiveCuiArray-->" + inactiveCuiArray);
+               logger.info("final newCuiArray" + newCuiArray + "inactiveCuiArray-->" + inactiveCuiArray);
                // Send data to cloud service
-               JsonObject apiResponse =
-                   RestCloudActionService.sendCuiData(newCuiArray, inactiveCuiArray, authToken);
+               JsonObject apiResponse = RestCloudActionService.sendCuiData(newCuiArray, inactiveCuiArray, authToken);
 
                // Store the updated CuiData
                cuiData = new JsonArray();
@@ -421,9 +429,7 @@ public class PlanExecutor {
      private void processPlanB() {
           JsonArray mesajeArr = null;
           try {
-               String url = storedId == null
-                   ? "https://webserviced.anaf.ro/SPVWS2/rest/listaMesaje?zile=1"
-                   : "https://webserviced.anaf.ro/SPVWS2/rest/listaMesaje?zile=50";
+               String url = storedId == null ? "https://webserviced.anaf.ro/SPVWS2/rest/listaMesaje?zile=1" : "https://webserviced.anaf.ro/SPVWS2/rest/listaMesaje?zile=50";
                logger.info("url------->" + url);
                JsonObject response = RestPlanService.executePlan(url);
                if (response != null) {
@@ -438,22 +444,19 @@ public class PlanExecutor {
                     }
 
                     if (mesajeArr == null || mesajeArr.size() == 0) {
-                         logger.info(
-                             "No messages found after filtering. Aborting further processing.");
+                         logger.info("No messages found after filtering. Aborting further processing.");
                          return; // Exit the method if no messages are left after filtering
                     }
 
                     logger.info("after filter mesajeArr response-------" + mesajeArr);
 
                     // Split messages into smaller packages if necessary
-                    List<JsonArray> messagePackages =
-                        splitIntoPackages(mesajeArr, 200); // Adjust package size as needed
+                    List<JsonArray> messagePackages = splitIntoPackages(mesajeArr, 200); // Adjust package size as needed
 
                     // Send each package to the cloud
                     for (JsonArray packageArr : messagePackages) {
                          logger.info("RestCloudActionService req array-------" + packageArr);
-                         JsonObject apiResponse =
-                             RestCloudActionService.sendMesajeData(packageArr, authToken);
+                         JsonObject apiResponse = RestCloudActionService.sendMesajeData(packageArr, authToken);
                          logger.info("RestCloudActionService response-------" + apiResponse);
                     }
 
@@ -516,9 +519,7 @@ public class PlanExecutor {
                long maxId = -1;
 
                for (String id : extractedIds) {
-                    File file = RestPlanService.getFile(
-                        "https://webserviced.anaf.ro/SPVWS2/rest/descarcare?id=" + id,
-                        spvDocsFolderPath);
+                    File file = RestPlanService.getFile("https://webserviced.anaf.ro/SPVWS2/rest/descarcare?id=" + id, spvDocsFolderPath);
 
                     long numericId = Long.parseLong(id.trim());
 
@@ -550,9 +551,7 @@ public class PlanExecutor {
 
                for (String cui : currentCuiSet) {
                     logger.info("plan c cui req---" + cui);
-                    JsonObject response = RestPlanService.executePlan(
-                        "https://webserviced.anaf.ro/SPVWS2/rest/cerere?tip=VECTOR%20FISCAL&cui="
-                        + cui.trim());
+                    JsonObject response = RestPlanService.executePlan("https://webserviced.anaf.ro/SPVWS2/rest/cerere?tip=VECTOR%20FISCAL&cui=" + cui.trim());
                     logger.info("plan c cui res---" + response);
 
                     Thread.sleep(1100);
@@ -579,9 +578,7 @@ public class PlanExecutor {
 
                for (String cui : currentCuiSet) {
                     logger.info("plan d cui req---" + cui);
-                    JsonObject response = RestPlanService.executePlan(
-                        "https://webserviced.anaf.ro/SPVWS2/rest/cerere?tip=Fisa%20Rol&cui="
-                        + cui.trim());
+                    JsonObject response = RestPlanService.executePlan("https://webserviced.anaf.ro/SPVWS2/rest/cerere?tip=Fisa%20Rol&cui=" + cui.trim());
                     logger.info("plan d cui res---" + response);
 
                     Thread.sleep(1100);
@@ -608,11 +605,9 @@ public class PlanExecutor {
                               String fileName = file.getName();
                               String documentId = fileName.substring(0, fileName.lastIndexOf('.'));
 
-                              logger.info("Processing file: " + fileName
-                                  + " (Document ID: " + documentId + ")");
+                              logger.info("Processing file: " + fileName + " (Document ID: " + documentId + ")");
 
-                              boolean uploadSuccess = RestCloudActionService.uploadDocumentFile(
-                                  file, documentId, authToken);
+                              boolean uploadSuccess = RestCloudActionService.uploadDocumentFile(file, documentId, authToken);
 
                               if (uploadSuccess) {
                                    logger.info("Successfully uploaded file: " + fileName);
@@ -645,9 +640,7 @@ public class PlanExecutor {
 
                               // Check if file is a valid PDF or XML
                               if (isPDFOrXML(file)) {
-                                   boolean uploadSuccess =
-                                       RestCloudActionService.uploadHotFolderDocumentFile(
-                                           file, authToken);
+                                   boolean uploadSuccess = RestCloudActionService.uploadHotFolderDocumentFile(file, authToken);
                                    if (uploadSuccess) {
                                         logger.info("Successfully uploaded file: " + fileName);
                                         if (file.delete()) {
