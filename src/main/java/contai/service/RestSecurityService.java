@@ -24,7 +24,7 @@ public class RestSecurityService {
 
     private static final Logger LOGGER = Logger.getLogger(RestSecurityService.class);
     private static final String BASE_URL = "https://spv-dev.contai.ro/api";
-    private static final String SECURITY_TOKENS_URL = BASE_URL + "/security-tokens";
+    private static final String SECURITY_TOKENS_URL = BASE_URL + "/Desktop/security-tokens";
     private static final String POLLING_URL = BASE_URL + "/app-events/unacknowledged";
     private static final String POLLING_ACKNOWLEDGE_URL = BASE_URL + "/app-events/acknowledge";
 

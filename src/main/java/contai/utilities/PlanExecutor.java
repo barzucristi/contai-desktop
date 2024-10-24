@@ -19,8 +19,10 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -71,16 +73,26 @@ public class PlanExecutor {
      }
 
      private void getAllPinCertificates() {
-          try {
-               JsonObject response = RestSecurityService.getAllPinCertificates(authToken);
-               JsonObject data = response.getAsJsonObject("data");
-               this.pinCertificates = (response.get("success").getAsBoolean() && data.has("security_tokens")) ? data.getAsJsonArray("security_tokens") : new JsonArray();
-          } catch (Exception e) {
-               logger.error("Error retrieving pin certificates: " + e.getMessage(), e);
-               this.pinCertificates = new JsonArray();
-          }
-     }
+    	    try {
+    	        JsonObject response = RestSecurityService.getAllPinCertificates(authToken);
+    	        logger.info("getAllPinCertificates response: " + response);
 
+    	        if (response.get("success").getAsBoolean() && response.has("data")) {
+    	         
+    	            JsonArray securityTokens = response.getAsJsonArray("data");
+    	            this.pinCertificates = securityTokens;
+    	            logger.info("Successfully loaded " + securityTokens.size() + " pin certificates");
+    	        } else {
+    	            logger.warn("Failed to get pin certificates: " + 
+    	                (response.has("message") ? response.get("message").getAsString() : "Unknown error"));
+    	            this.pinCertificates = new JsonArray();
+    	        }
+    	    } catch (Exception e) {
+    	        logger.error("Error retrieving pin certificates: " + e.getMessage(), e);
+    	        this.pinCertificates = new JsonArray();
+    	    }
+    	}
+     
      private void getPostAllCertificate() {
           try {
                JsonObject response = RestSecurityService.getAddAllCertificates(authToken);
@@ -89,30 +101,82 @@ public class PlanExecutor {
           }
      }
 
-     private void startEventPolling() {
-          timer.scheduleAtFixedRate(new TimerTask() {
-               @Override
-               public void run() {
-                    try {
-                         JsonObject response = RestSecurityService.listAllEvents(authToken);
-                         logger.info("All Events====" + response);
 
-                         if (response.get("success").getAsBoolean() && response.has("data")) {
-                              JsonArray eventsData = response.getAsJsonArray("data");
-                              if (eventsData.size() > 0) {
-                                   logger.info("Fetched events: " + eventsData);
-                              } else {
-                                   logger.warn("No events found in the response data.");
-                              }
-                         } else {
-                              logger.error("Error in response: " + response.get("message").getAsString());
-                         }
-                    } catch (Exception e) {
-                         logger.error("Error retrieving all events: " + e.getMessage(), e);
+private void startEventPolling() {
+    timer.scheduleAtFixedRate(new TimerTask() {
+        @Override
+        public void run() {
+            try {
+                JsonObject response = RestSecurityService.listAllEvents(authToken);
+                
+
+                if (response.get("success").getAsBoolean() && response.has("data")) {
+                    JsonArray eventsData = response.getAsJsonArray("data");
+                    if (eventsData.size() > 0) {
+                        logger.info("Fetched events: " + eventsData);
+                        
+                        // Create a map of serial numbers to pins from pinCertificates
+                        Map<String, String> pinMap = new HashMap<>();
+                        for (JsonElement certElement : pinCertificates) {
+                            JsonObject cert = certElement.getAsJsonObject();
+                           
+                            String serialNumber = cert.get("serial_number").getAsString();
+                            String pin = cert.get("pin").isJsonNull() ? null : cert.get("pin").getAsString();
+                          
+                            pinMap.put(serialNumber, pin);
+                        }
+
+                        // Iterate through the events
+                        for (JsonElement eventElement : eventsData) {
+                            JsonObject event = eventElement.getAsJsonObject();
+                            // Check if the event type is 'update'
+                            if ("update".equals(event.get("event_type").getAsString())) {
+                                // Get the payload
+                                JsonObject payload = event.getAsJsonObject("payload");
+                                if (payload != null) {
+                                    String serialNumber = payload.get("serial_number").getAsString();
+                                    String pin = payload.get("pin").getAsString();
+
+                                    logger.info("pinMapr: " + pinMap + " serialNumber"+serialNumber);
+                                    // Check if serialNumber exists in pinMap and update pin if necessary
+                                    if (pinMap.containsKey(serialNumber)) {
+                                        String existingPin = pinMap.get(serialNumber);
+                                        if (existingPin != null) {
+                                            // Update pin logic (set pin or do something with it)
+                                            logger.info("Found matching serial_number: " + serialNumber + ", existing pin: " + existingPin);
+                                            
+                                            // Update the pin value in the global pinCertificates array
+                                            for (JsonElement certElement : pinCertificates) {
+                                                JsonObject cert = certElement.getAsJsonObject();
+                                                if (serialNumber.equals(cert.get("serial_number").getAsString())) {
+                                                    cert.addProperty("pin", pin); // Update the pid with the new pin
+                                                    logger.info("Updated pin for serial_number: " + serialNumber + " to " + pin);
+                                                    break; // Exit the loop once the update is done
+                                                }
+                                            }
+                                        } else {
+                                            logger.info("Serial number: " + serialNumber + " has no associated pin.");
+                                        }
+                                    } else {
+                                        logger.info("Serial number: " + serialNumber + " not found in pinCertificates.");
+                                    }
+                                    
+                                    logger.info("Updated serial_number: " + serialNumber + ", pin: " + pin);
+                                }
+                            }
+                        }
+                    } else {
+                        logger.warn("No events found in the response data.");
                     }
-               }
-          }, 0, 5000); // Initial delay 0ms, repeat every 10000ms (10 seconds)
-     }
+                } else {
+                    logger.error("Error in response: " + response.get("message").getAsString());
+                }
+            } catch (Exception e) {
+                logger.error("Error retrieving all events: " + e.getMessage(), e);
+            }
+        }
+    }, 0, 5000); 
+}
 
      public void setupPlans() {
           if (userData != null && userData.has("organization")) {
