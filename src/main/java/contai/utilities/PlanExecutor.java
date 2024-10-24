@@ -109,7 +109,7 @@ private void startEventPolling() {
             try {
                 JsonObject response = RestSecurityService.listAllEvents(authToken);
                 
-
+             
                 if (response.get("success").getAsBoolean() && response.has("data")) {
                     JsonArray eventsData = response.getAsJsonArray("data");
                     if (eventsData.size() > 0) {
@@ -150,6 +150,7 @@ private void startEventPolling() {
                                                 JsonObject cert = certElement.getAsJsonObject();
                                                 if (serialNumber.equals(cert.get("serial_number").getAsString())) {
                                                     cert.addProperty("pin", pin); // Update the pid with the new pin
+                                                 
                                                     logger.info("Updated pin for serial_number: " + serialNumber + " to " + pin);
                                                     break; // Exit the loop once the update is done
                                                 }
@@ -163,6 +164,11 @@ private void startEventPolling() {
                                     
                                     logger.info("Updated serial_number: " + serialNumber + ", pin: " + pin);
                                 }
+                                
+                                String[] eventIds = { event.get("_id").getAsString() };
+                                JsonObject acknowledgeResponse = RestSecurityService.acknowledge(eventIds, authToken);
+                                logger.info("Deleted event with id: " + event.get("_id").getAsString() + "acknowledgeResponse:-"+acknowledgeResponse);
+                                
                             }
                         }
                     } else {
